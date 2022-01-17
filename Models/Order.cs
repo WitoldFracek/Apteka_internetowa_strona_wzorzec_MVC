@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace PO_Projekt.Models
 {
@@ -19,7 +22,7 @@ namespace PO_Projekt.Models
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
-        public DateTime OrderDate { get; set }
+        public DateTime OrderDate { get; set; }
         public enum ShippingTypes { get; set; }
 
 

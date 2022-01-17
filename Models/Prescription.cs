@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace PO_Projekt.Models
 {
@@ -14,8 +17,8 @@ namespace PO_Projekt.Models
         [Required]
         [Range(0, int.MaxValue)]
         public int PrescriptionCode { get; set; }
-        public DateTime StartDate { get; set }
-        public DateTime EndDate { get; set }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         [Required]
         public int UserId { get; set; }
         [ForeignKey("UserId")]
