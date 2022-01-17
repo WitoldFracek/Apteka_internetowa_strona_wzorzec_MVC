@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace PO_Projekt.Models
 {
-    public class ShippingType
+    public enum ShippingType
     {
+        ParcelLocker = 1,
+        PostOffice = 2,
+        Delivery = 3,
+        LocalStore = 4
     }
 }
