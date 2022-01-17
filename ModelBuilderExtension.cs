@@ -267,8 +267,20 @@ namespace PO_Projekt
                 }
                 );
 
-            //modelBuilder.Entity<ProductOrder>().HasData(
-            //    );
+            modelBuilder.Entity<ProductOrder>().HasData(
+                new ProductOrder()
+                {
+                    Id = 1,
+                    ProductId = 11,
+                    OrderId = 4
+                },
+                new ProductOrder()
+                {
+                    Id = 2,
+                    ProductId = 1,
+                    OrderId = 3
+                }
+                );
 
         }
     }
