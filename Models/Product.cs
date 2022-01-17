@@ -13,11 +13,12 @@ namespace PO_Projekt.Models
         [Required]
         public int Id { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        
         [NotMapped]
         public ProductName ProductName { get; set; }
         [Required]
         public int ProductNameId { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
     }
 }

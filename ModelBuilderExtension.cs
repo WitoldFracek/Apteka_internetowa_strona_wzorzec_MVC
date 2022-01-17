@@ -188,7 +188,7 @@ namespace PO_Projekt
                     Name = "Apap",
                     Price = 6.99,
                     RequiresPrescription = false,
-                    Description = "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach. Apap można stosować przeciwko gorączce, np. towarzyszącej przeziębieniu lub grypie. Lek jest przeznaczony dla osób dorosłych i młodzieży w wieku powyżej 12 lat.",
+                    Description = "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.",
                     ManufacturerId = 3
                 },
                 new ProductName()
@@ -206,10 +206,69 @@ namespace PO_Projekt
                 new Product()
                 {
                     Id = 1,
-                    Name = "Xanax",
-                    ProductNameId = 1
+                    ProductNameId = 1,
+                    ExpirationDate = new DateTime(2022, 5, 20)
+                },
+                new Product()
+                {
+                    Id = 2,
+                    ProductNameId = 1,
+                    ExpirationDate = new DateTime(2022, 5, 21)
+                },
+                new Product()
+                {
+                    Id = 3,
+                    ProductNameId = 1,
+                    ExpirationDate = new DateTime(2022, 4, 30)
+                },
+                new Product()
+                {
+                    Id = 4,
+                    ProductNameId = 2,
+                    ExpirationDate = new DateTime(2022, 7, 1)
+                },
+                new Product()
+                {
+                    Id = 5,
+                    ProductNameId = 2,
+                    ExpirationDate = new DateTime(2022, 7, 3)
+                },
+                new Product()
+                {
+                    Id = 6,
+                    ProductNameId = 2,
+                    ExpirationDate = new DateTime(2022, 6, 20)
+                },
+                new Product()
+                {
+                    Id = 7,
+                    ProductNameId = 2,
+                    ExpirationDate = new DateTime(2022, 6, 18)
+                },
+                new Product()
+                {
+                    Id = 8,
+                    ProductNameId = 3
+                },
+                new Product()
+                {
+                    Id = 9,
+                    ProductNameId = 3
+                },
+                new Product()
+                {
+                    Id = 10,
+                    ProductNameId = 3
+                },
+                new Product()
+                {
+                    Id = 11,
+                    ProductNameId = 3
                 }
                 );
+
+            //modelBuilder.Entity<ProductOrder>().HasData(
+            //    );
 
         }
     }
