@@ -166,7 +166,7 @@ namespace PO_Projekt
             modelBuilder.Entity<PrescriptionOrder>().HasData(
                 new PrescriptionOrder()
                 {
-                    Id = 0,
+                    Id = 1,
                     OrderId = 1,
                     PrescriptionId = 1
                 }
