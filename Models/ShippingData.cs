@@ -21,5 +21,20 @@ namespace PO_Projekt.Models
         [Required]
         [MaxLength(30, ErrorMessage = "City name cannot be longer than {1} characters")]
         public string City { get; set; }
+
+        [Required]
+        [MaxLength(50, ErrorMessage = "Street name cannot be longer than {1} characters")]
+        public string Street { get; set; }
+
+        [Required]
+        [MaxLength(7, ErrorMessage = "Home number cannot be longer than {1} characters")]
+        public string HomeNumber { get; set; }
+
+        [MaxLength(7, ErrorMessage = "Local number cannot be longer than {1} characters")]
+        public string LocalNumber { get; set; }
+
+        [Required]
+        [Range(0, int.MaxValue)]
+        public int PostalNumber { get; set; }
     }
 }
