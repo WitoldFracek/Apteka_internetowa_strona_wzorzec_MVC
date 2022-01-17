@@ -11,8 +11,6 @@ namespace PO_Projekt.Models
     public class Prescription
     {
         [Required]
-        [Key]
-        [Range(0, int.MaxValue)]
         public int Id { get; set; }
         [Required]
         [Range(0, int.MaxValue)]

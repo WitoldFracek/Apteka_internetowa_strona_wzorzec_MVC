@@ -40,7 +40,7 @@ namespace PO_Projekt
 
             services.AddControllersWithViews();
             services.AddDbContextPool<ShopDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ShopDb")));
+            options.UseSqlServer(Configuration.GetConnectionString("POShopDb")));
 
         }
 
