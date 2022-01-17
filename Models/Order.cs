@@ -17,10 +17,12 @@ namespace PO_Projekt.Models
         [Required]
         public int ShippingDataId { get; set; }
         [ForeignKey("ShippingDataId")]
+        [NotMapped]
         public ShippingData ShippingData { get; set; }
         [Required]
         public int UserId { get; set; }
         [ForeignKey("UserId")]
+        [NotMapped]
         public User User { get; set; }
         public DateTime OrderDate { get; set; }
         public enum ShippingTypes { get; set; }

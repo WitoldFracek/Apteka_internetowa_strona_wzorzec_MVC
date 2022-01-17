@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace PO_Projekt.Models
 {
-    public class PrescriptionOrder
+    public class PrescriptionOrder {
     
         [Required]
         [Key]

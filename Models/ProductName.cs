@@ -28,7 +28,7 @@ namespace PO_Projekt.Models
 
         [Required]
         public string Description { get; set; }
-
+        [NotMapped]
         public Manufacturer Manufacturer { get; set; }
         [Required]
         public int ManufacturerId { get; set; }
