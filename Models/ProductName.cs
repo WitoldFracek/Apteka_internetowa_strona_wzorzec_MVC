@@ -24,7 +24,7 @@ namespace PO_Projekt.Models
         public double Price { get; set; }
 
         [Required]
-        public string RequiresPrescription { get; set; }
+        public bool RequiresPrescription { get; set; }
 
         [Required]
         public string Description { get; set; }

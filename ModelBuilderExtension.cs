@@ -21,6 +21,16 @@ namespace PO_Projekt
                 {
                     Id = 2,
                     Name = "Novartis"
+                },
+                new Manufacturer()
+                {
+                    Id = 3,
+                    Name = "Us Pharmacia"
+                },
+                new Manufacturer()
+                {
+                    Id = 4,
+                    Name = "Paso"
                 }
 
                 );
@@ -52,7 +62,7 @@ namespace PO_Projekt
             modelBuilder.Entity<ShippingData>().HasData(
                 new ShippingData()
                 {
-                    Id = 0,
+                    Id = 1,
                     UserId = 1,
                     City = "Wrocław",
                     Street = "Fiołkowa",
@@ -62,7 +72,7 @@ namespace PO_Projekt
                 },
                 new ShippingData()
                 {
-                    Id = 1,
+                    Id = 2,
                     UserId = 1,
                     City = "Wrocław",
                     Street = "Nizinna",
@@ -71,7 +81,7 @@ namespace PO_Projekt
                 },
                 new ShippingData()
                 {
-                    Id = 2,
+                    Id = 3,
                     UserId = 2,
                     City = "Kraków",
                     Street = "Łańcuchowa",
@@ -81,7 +91,7 @@ namespace PO_Projekt
                 },
                 new ShippingData()
                 {
-                    Id = 3,
+                    Id = 4,
                     UserId = 1,
                     City = "Warszawa",
                     Street = "Długa",
@@ -129,7 +139,75 @@ namespace PO_Projekt
             modelBuilder.Entity<Prescription>().HasData(
                 new Prescription()
                 {
+                    Id = 1,
+                    PrescriptionCode = 13423,
+                    StartDate = new DateTime(2022, 1, 1),
+                    EndDate = new DateTime(2022, 2, 1),
+                    UserId = 1
+                },
+                new Prescription()
+                {
+                    Id = 2,
+                    PrescriptionCode = 13778,
+                    StartDate = new DateTime(2022, 2, 1),
+                    EndDate = new DateTime(2022, 2, 13),
+                    UserId = 1
+                },
+                new Prescription()
+                {
+                    Id = 3,
+                    PrescriptionCode = 14523,
+                    StartDate = new DateTime(2022, 1, 12),
+                    EndDate = new DateTime(2022, 1, 30),
+                    UserId = 3
+                }
+                );
 
+            modelBuilder.Entity<PrescriptionOrder>().HasData(
+                new PrescriptionOrder()
+                {
+                    Id = 0,
+                    OrderId = 1,
+                    PrescriptionId = 1
+                }
+                );
+
+            modelBuilder.Entity<ProductName>().HasData(
+                new ProductName()
+                {
+                    Id = 1,
+                    Name = "Xanax",
+                    Price = 45.99,
+                    RequiresPrescription = true,
+                    Description = "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni",
+                    ManufacturerId = 1
+                },
+                new ProductName()
+                {
+                    Id = 2,
+                    Name = "Apap",
+                    Price = 6.99,
+                    RequiresPrescription = false,
+                    Description = "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach. Apap można stosować przeciwko gorączce, np. towarzyszącej przeziębieniu lub grypie. Lek jest przeznaczony dla osób dorosłych i młodzieży w wieku powyżej 12 lat.",
+                    ManufacturerId = 3
+                },
+                new ProductName()
+                {
+                    Id = 3,
+                    Name = "Opaska elastyczna z zapinką",
+                    Price = 3.99,
+                    RequiresPrescription = false,
+                    Description = "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.",
+                    ManufacturerId = 4
+                }
+                );
+
+            modelBuilder.Entity<Product>().HasData(
+                new Product()
+                {
+                    Id = 1,
+                    Name = "Xanax",
+                    ProductNameId = 1
                 }
                 );
 
