@@ -17,7 +17,8 @@ namespace PO_Projekt.Models
         [Required]
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
-        public Order Order { get; set; 
+        public Order Order { get; set; }
+
         [Required]
         public int PrescriptionId { get; set; }
         [ForeignKey("PrescriptionId")]
