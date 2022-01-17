@@ -17,7 +17,13 @@ namespace PO_Projekt.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50, ErrorMessage = "")]
+        [MaxLength(50, ErrorMessage = "Email address cannot exceed {1} characters")]
         public string Email { get; set; }
+
+        [Required]
+        [MaxLength(20, ErrorMessage = "Password cannot exceed {1} characters")]
+        public string Password { get; set; }
+
+        public DateTime BirthDate { get; set; }
     }
 }
