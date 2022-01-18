@@ -33,7 +33,6 @@ namespace PO_Projekt.Models
 
         [Required]
         public string Description { get; set; }
-        [NotMapped]
         public Manufacturer Manufacturer { get; set; }
         [Required]
         public int ManufacturerId { get; set; }
@@ -45,9 +44,8 @@ namespace PO_Projekt.Models
         {
             get { return ImageFilename != null && !ImageFilename.Equals("") ? IMAGE + ImageFilename : DefaultImage; }
         }
-
+        [Required]
         public int ProductFormId { get; set; }
-        [NotMapped]
         public ProductForm ProductForm { get; set; }
 
     }
