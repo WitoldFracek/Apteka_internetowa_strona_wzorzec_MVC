@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-1 col-md-offset-2">
         <section>
-            <button class="btn btn-primary" onclick="setSelected(event)">Search</button>
+            <button id="SearchButton" class="btn btn-primary" onclick="setSelected(event)">Search</button>
         </section>
     </div>
 </div>
@@ -116,6 +116,15 @@
 
 
 <script>
+    var input = document.getElementById("SearchContentInput");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("SearchButton").click();
+        }
+    });
+
+
     var setSelected = function (event) {
         var url = window.location.href;
         var elems = url.split("/");

@@ -4,4 +4,28 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    <ul class="navbar-nav flex-grow-1">
+        @{
+            foreach (var tupleVar in new List<Tuple<int, string>>
+                                {
+                                    Tuple.Create( 1, "sprzęt medyczny" ),
+                                    Tuple.Create( 2, "kosmetyki" ),
+                                    Tuple.Create( 3, "suplementy" ),
+                                    Tuple.Create( 4, "przeciwbólowe" ),
+                                    Tuple.Create( 5, "antybiotyki" ),
+                                    Tuple.Create( 6, "przeziębienie" ),
+                                    Tuple.Create( 7, "dziecko" ),
+                                    Tuple.Create( 8, "leki" ),
+                                    Tuple.Create( 9, "inne" ),
+                                })
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="ProductNames" asp-action="Index"
+                       asp-route-producttypeid="@tupleVar.Item1">@tupleVar.Item2</a>
+                </li>
+            }
+        }
+
+
+    </ul>
 </div>
