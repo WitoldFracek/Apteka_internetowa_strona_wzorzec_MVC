@@ -23,6 +23,8 @@ namespace PO_Projekt.Controllers
         public async Task<IActionResult> Index()
         {
             var shopDbContext = _context.ProductNames.Include(p => p.Manufacturer).Include(p => p.ProductForm).Include(p => p.ProductType);
+            ViewData["ProductTypeList"] = new SelectList(_context.ProductTypes, "Id", "Name");
+            ViewData["ProductFormList"] = new SelectList(_context.ProductForms, "Id", "Name");
             return View(await shopDbContext.ToListAsync());
         }
 

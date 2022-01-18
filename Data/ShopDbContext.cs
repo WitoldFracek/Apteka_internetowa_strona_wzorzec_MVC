@@ -18,6 +18,8 @@ namespace PO_Projekt.Data
         public DbSet<PrescriptionOrder> PrescriptionOrders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductName> ProductNames { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<ProductForm> ProductForms { get; set; }
         public DbSet<ProductOrder> ProductOrders { get; set; }
         public DbSet<ShippingData> ShippingData { get; set; }
 

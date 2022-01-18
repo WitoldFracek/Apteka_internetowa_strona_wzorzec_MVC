@@ -37,7 +37,7 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductForm",
+                name: "ProductForms",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -46,7 +46,7 @@ namespace PO_Projekt.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductForm", x => x.Id);
+                    table.PrimaryKey("PK_ProductForms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,7 +64,7 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductType",
+                name: "ProductTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -73,7 +73,7 @@ namespace PO_Projekt.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductType", x => x.Id);
+                    table.PrimaryKey("PK_ProductTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,15 +116,15 @@ namespace PO_Projekt.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductNames_ProductForm_ProductFormId",
+                        name: "FK_ProductNames_ProductForms_ProductFormId",
                         column: x => x.ProductFormId,
-                        principalTable: "ProductForm",
+                        principalTable: "ProductForms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductNames_ProductType_ProductTypeId",
+                        name: "FK_ProductNames_ProductTypes_ProductTypeId",
                         column: x => x.ProductTypeId,
-                        principalTable: "ProductType",
+                        principalTable: "ProductTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -244,7 +244,7 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ProductForm",
+                table: "ProductForms",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
@@ -267,7 +267,7 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ProductType",
+                table: "ProductTypes",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
@@ -417,10 +417,10 @@ namespace PO_Projekt.Migrations
                 name: "Manufacturers");
 
             migrationBuilder.DropTable(
-                name: "ProductForm");
+                name: "ProductForms");
 
             migrationBuilder.DropTable(
-                name: "ProductType");
+                name: "ProductTypes");
         }
     }
 }

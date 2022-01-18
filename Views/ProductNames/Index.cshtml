@@ -9,6 +9,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>*@
+<p>
+    <select class="form-control col-md-2" id="selectList" asp-items="ViewBag.ProductTypeList"
+            onchange="setSelected(event)">
+        <option value="-1">All types</option>
+    </select>
+</p>
+<p>
+    <select class="form-control col-md-2" id="selectList" asp-items="ViewBag.ProductFormList"
+            onchange="setSelected(event)">
+        <option value="-1">All forms</option>
+    </select>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -45,10 +57,14 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                </a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -57,30 +73,30 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.RequiresPrescription)
-            </td>*@
-            
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Manufacturer.Name)
-            </td>*@
-            
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ProductForm.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductType.Name)
-            </td>*@
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">
-                <img src="~/image/carts.png" height="40"/>
-            </a>
-            @*<a asp-action="Edit" asp-route-id="@item.Id">-</a> |
-        <a asp-action="Details" asp-route-id="@item.Id">+</a>*@
+            @Html.DisplayFor(modelItem => item.RequiresPrescription)
+        </td>*@
 
-            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Manufacturer.Name)
+        </td>*@
+
+            @*<td>
+            @Html.DisplayFor(modelItem => item.ProductForm.Name)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductType.Name)
+        </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">
+                    <img src="~/image/carts.png" height="40" />
+                </a>
+                @*<a asp-action="Edit" asp-route-id="@item.Id">-</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">+</a>*@
+
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
         </tr>
 }
     </tbody>
