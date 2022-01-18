@@ -8,7 +8,7 @@ namespace PO_Projekt.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Manufacturers ",
+                name: "Manufacturers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -97,7 +97,7 @@ namespace PO_Projekt.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     RequiresPrescription = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -309,7 +309,9 @@ namespace PO_Projekt.Migrations
                 {
                     { 3, "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.", "opaska-elastyczna-tkana-z-zapinka.jpg", 4, "Opaska elastyczna z zapinką", 3.9900000000000002, 7, 1, false },
                     { 2, "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.", "apap.jpg", 3, "Apap", 6.9900000000000002, 1, 6, false },
-                    { 1, "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni", "xanax.jpg", 1, "Xanax", 45.990000000000002, 1, 8, true }
+                    { 1, "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni", "xanax.jpg", 1, "Xanax", 45.990000000000002, 1, 8, true },
+                    { 4, "Ibuprom Max to lek przeciwbólowy, ale także stosuje się go w leczeniu stanu zapalnego. Lek również obniża gorączkę.", "", 1, "Ibuprom Max, 400 mg, tabletki drażowane, 48 szt. (butelka)", 26.489999999999998, 1, 8, false },
+                    { 5, "Produkt leczniczy Ibuprom działa przeciwbólowo, przeciwzapalnie i przeciwgorączkowo. Stosuje się go w bólach głowy, zębów, mięśniowych, okolicy lędźwiowo-krzyżowej, kostnych i stawowych oraz w bolesnym miesiączkowaniu oraz w gorączce.", "", 2, "Ibuprom, 200 mg, tabletki powlekane, 10 szt.", 6.9900000000000002, 1, 8, false }
                 });
 
             migrationBuilder.InsertData(

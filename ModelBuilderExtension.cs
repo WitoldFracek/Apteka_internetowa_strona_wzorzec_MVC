@@ -296,6 +296,30 @@ namespace PO_Projekt
                     ImageFilename = "opaska-elastyczna-tkana-z-zapinka.jpg",
                     ProductFormId = 7,
                     ProductTypeId = 1
+                },
+                new ProductName()
+                {
+                    Id = 4,
+                    Name = "Ibuprom Max, 400 mg, tabletki drażowane, 48 szt. (butelka)",
+                    Price = 26.49,
+                    RequiresPrescription = false,
+                    Description = "Ibuprom Max to lek przeciwbólowy, ale także stosuje się go w leczeniu stanu zapalnego. Lek również obniża gorączkę.",
+                    ManufacturerId = 1,
+                    ImageFilename = "",
+                    ProductFormId = 1,
+                    ProductTypeId = 8
+                },
+                new ProductName()
+                {
+                    Id = 5,
+                    Name = "Ibuprom, 200 mg, tabletki powlekane, 10 szt.",
+                    Price = 6.99,
+                    RequiresPrescription = false,
+                    Description = "Produkt leczniczy Ibuprom działa przeciwbólowo, przeciwzapalnie i przeciwgorączkowo. Stosuje się go w bólach głowy, zębów, mięśniowych, okolicy lędźwiowo-krzyżowej, kostnych i stawowych oraz w bolesnym miesiączkowaniu oraz w gorączce.",
+                    ManufacturerId = 2,
+                    ImageFilename = "",
+                    ProductFormId = 1,
+                    ProductTypeId = 8
                 }
                 );
 

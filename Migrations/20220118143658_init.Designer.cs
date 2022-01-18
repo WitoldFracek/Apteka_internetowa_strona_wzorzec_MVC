@@ -10,7 +10,7 @@ using PO_Projekt.Data;
 namespace PO_Projekt.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20220118132327_init")]
+    [Migration("20220118143658_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -361,8 +361,8 @@ namespace PO_Projekt.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -421,6 +421,30 @@ namespace PO_Projekt.Migrations
                             Price = 3.9900000000000002,
                             ProductFormId = 7,
                             ProductTypeId = 1,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Ibuprom Max to lek przeciwbólowy, ale także stosuje się go w leczeniu stanu zapalnego. Lek również obniża gorączkę.",
+                            ImageFilename = "",
+                            ManufacturerId = 1,
+                            Name = "Ibuprom Max, 400 mg, tabletki drażowane, 48 szt. (butelka)",
+                            Price = 26.489999999999998,
+                            ProductFormId = 1,
+                            ProductTypeId = 8,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Produkt leczniczy Ibuprom działa przeciwbólowo, przeciwzapalnie i przeciwgorączkowo. Stosuje się go w bólach głowy, zębów, mięśniowych, okolicy lędźwiowo-krzyżowej, kostnych i stawowych oraz w bolesnym miesiączkowaniu oraz w gorączce.",
+                            ImageFilename = "",
+                            ManufacturerId = 2,
+                            Name = "Ibuprom, 200 mg, tabletki powlekane, 10 szt.",
+                            Price = 6.9900000000000002,
+                            ProductFormId = 1,
+                            ProductTypeId = 8,
                             RequiresPrescription = false
                         });
                 });
