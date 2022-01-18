@@ -57,5 +57,14 @@ namespace PO_Projekt.Models
 
         [NotMapped]
         public List<ProductName> SimilarProducts { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Count")]
+        public int ShoppingCartCount { get; set; }
+
+        [NotMapped]
+        [DataType(DataType.Currency)]
+        [Display(Name = "Sum")]
+        public double ShoppingCartSumPrice { get; set; }
     }
 }

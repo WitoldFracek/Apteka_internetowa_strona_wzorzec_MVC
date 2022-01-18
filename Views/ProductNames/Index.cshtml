@@ -86,14 +86,15 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
-                            <td>
+                            <td align="right">
                                 @Html.DisplayFor(modelItem => item.Price)
                             </td>
                             @*<td>
                                     @Html.DisplayFor(modelItem => item.RequiresPrescription)
                                 </td>*@
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">
+                                <button onclick="addToShoppingCart(@item.Id)">Add to cart</button>
+                                <a asp-controller="ShoppingCart" asp-action="AddCart" asp-route-id="@item.Id">
                                     <img src="~/image/carts.png" height="40" />
                                 </a>
                                 @*<a asp-action="Edit" asp-route-id="@item.Id">-</a> |
@@ -126,13 +127,17 @@
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
+        return "";
     }
 
-    var addToShoppingCart = function (event, id) {
+    var addToShoppingCart = function (id) {
         var strId = getCookie(id.ToString());
         if (strId != "") {
             var iId = parseInt(strId) + 1;
             document.cookie = strId + "=" + iId.ToString();
+        }
+        else {
+            document.cookie = strId + "=1";
         }
     }
 
