@@ -10,6 +10,11 @@ namespace PO_Projekt.Models
 {
     public class ProductName
     {
+        [NotMapped]
+        public static string IMAGE = "/image/";
+        [NotMapped]
+        public static string DefaultImage = "/image/no_image.jpg";
+
         [Required]
         public int Id { get; set; }
 
@@ -32,5 +37,13 @@ namespace PO_Projekt.Models
         public Manufacturer Manufacturer { get; set; }
         [Required]
         public int ManufacturerId { get; set; }
+
+        public string ImageFilename { get; set; }
+
+        [NotMapped]
+        public string PhotoRelativePath
+        {
+            get { return ImageFilename != null && !ImageFilename.Equals("") ? IMAGE + ImageFilename : DefaultImage; }
+        }
     }
 }

@@ -180,7 +180,8 @@ namespace PO_Projekt
                     Price = 45.99,
                     RequiresPrescription = true,
                     Description = "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni",
-                    ManufacturerId = 1
+                    ManufacturerId = 1,
+                    ImageFilename = "xanax.jpg"
                 },
                 new ProductName()
                 {
@@ -189,7 +190,8 @@ namespace PO_Projekt
                     Price = 6.99,
                     RequiresPrescription = false,
                     Description = "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.",
-                    ManufacturerId = 3
+                    ManufacturerId = 3,
+                    ImageFilename = "apap.jpg"
                 },
                 new ProductName()
                 {
@@ -198,7 +200,8 @@ namespace PO_Projekt
                     Price = 3.99,
                     RequiresPrescription = false,
                     Description = "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.",
-                    ManufacturerId = 4
+                    ManufacturerId = 4,
+                    ImageFilename = "opaska-elastyczna-tkana-z-zapinka.jpg"
                 }
                 );
 
