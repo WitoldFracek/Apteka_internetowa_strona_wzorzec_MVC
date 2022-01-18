@@ -21,6 +21,12 @@
         <option value="-1">All forms</option>
     </select>
 </p>
+<p>
+    <select class="form-control col-md-2" id="ManufacturerList" asp-items="ViewBag.ManufacturerList"
+            onchange="setSelected(event)">
+        <option value="-1">All forms</option>
+    </select>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -110,8 +116,10 @@
 
         var liProductTypeList = document.getElementById('ProductTypeList');
         var liProductFormList = document.getElementById('ProductFormList');
+        var liManufacturerList = document.getElementById('ManufacturerList');
         var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
         var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
+        var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
 
         var selectedStr = ""
         if (selectedProductTypeId != -1) {
@@ -122,6 +130,12 @@
         }
         if (selectedProductFormId != -1) {
             selectedStr += "productformid=" + selectedProductFormId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (selectedManufacturerId != -1) {
+            selectedStr += "manufacturerid=" + selectedManufacturerId;
         }
         window.location.href = newUrl + "?" + selectedStr;
     };

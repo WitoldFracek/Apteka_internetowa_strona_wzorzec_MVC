@@ -20,12 +20,12 @@ namespace PO_Projekt.Controllers
         }
 
         // GET: ProductNames
-        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId)
+        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId)
         {
             var shopDbContext = _context.ProductNames.Include(p => p.Manufacturer).Include(p => p.ProductForm).Include(p => p.ProductType);
             ViewData["ProductTypeList"] = new SelectList(_context.ProductTypes, "Id", "Name", ProductTypeId);
             ViewData["ProductFormList"] = new SelectList(_context.ProductForms, "Id", "Name", ProductFormId);
-
+            ViewData["ManufacturerList"] = new SelectList(_context.Manufacturers, "Id", "Name", ManufacturerId);
 
             var shopContextFiltered = _context.ProductNames.Select(a => a);
 
@@ -36,6 +36,10 @@ namespace PO_Projekt.Controllers
             if (ProductFormId != null)
             {
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductFormId == ProductFormId);
+            }
+            if (ManufacturerId != null)
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ManufacturerId == ManufacturerId);
             }
 
             return View(await shopContextFiltered.ToListAsync());
