@@ -10,11 +10,24 @@
         <a asp-action="Create">Create New</a>
     </p>*@
 
+<div class="row">
+    <div class="col-md-11">
+        <section>
+            <input id="SearchContentInput" class="form-control" value="@ViewBag.SearchContent" />
+        </section>
+    </div>
+    <div class="col-md-1 col-md-offset-2">
+        <section>
+            <button class="btn btn-primary" onclick="setSelected(event)">Search</button>
+        </section>
+    </div>
+</div>
+<br />
 
 <div class="row">
     <div class="col-md-2">
-        <h4>Filters</h4>
         <section>
+            <h4>Filters</h4>
             <p>
                 <select class="form-control" id="ProductTypeList" asp-items="ViewBag.ProductTypeList"
                         onchange="setSelected(event)">
@@ -30,7 +43,7 @@
             <p>
                 <select class="form-control" id="ManufacturerList" asp-items="ViewBag.ManufacturerList"
                         onchange="setSelected(event)">
-                    <option value="-1">All forms</option>
+                    <option value="-1">All manufacturers</option>
                 </select>
             </p>
         </section>
@@ -111,9 +124,11 @@
         var liProductTypeList = document.getElementById('ProductTypeList');
         var liProductFormList = document.getElementById('ProductFormList');
         var liManufacturerList = document.getElementById('ManufacturerList');
+        var SearchContentInput = document.getElementById('SearchContentInput');
         var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
         var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
         var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
+        var searchContent = SearchContentInput.value;
 
         var selectedStr = ""
         if (selectedProductTypeId != -1) {
@@ -130,6 +145,13 @@
         }
         if (selectedManufacturerId != -1) {
             selectedStr += "manufacturerid=" + selectedManufacturerId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (searchContent != "") {
+            searchContent = searchContent.replace(' ', '+')
+            selectedStr += "searchcontent=" + searchContent;
         }
         window.location.href = newUrl + "?" + selectedStr;
     };
