@@ -14,7 +14,6 @@ namespace PO_Projekt.Models
         public int Id { get; set; }
 
         
-        [NotMapped]
         public ProductName ProductName { get; set; }
         [Required]
         public int ProductNameId { get; set; }
