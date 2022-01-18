@@ -10,13 +10,13 @@
     <a asp-action="Create">Create New</a>
 </p>*@
 <p>
-    <select class="form-control col-md-2" id="selectList" asp-items="ViewBag.ProductTypeList"
+    <select class="form-control col-md-2" id="ProductTypeList" asp-items="ViewBag.ProductTypeList"
             onchange="setSelected(event)">
         <option value="-1">All types</option>
     </select>
 </p>
 <p>
-    <select class="form-control col-md-2" id="selectList" asp-items="ViewBag.ProductFormList"
+    <select class="form-control col-md-2" id="ProductFormList" asp-items="ViewBag.ProductFormList"
             onchange="setSelected(event)">
         <option value="-1">All forms</option>
     </select>
@@ -101,3 +101,28 @@
 }
     </tbody>
 </table>
+
+<script>
+    var setSelected = function (event) {
+        var url = window.location.href;
+        var elems = url.split("/");
+        var newUrl = elems[0] + "/" + elems[1] + "/" + elems[2] + "/ProductNames";
+
+        var liProductTypeList = document.getElementById('ProductTypeList');
+        var liProductFormList = document.getElementById('ProductFormList');
+        var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
+        var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
+
+        var selectedStr = ""
+        if (selectedProductTypeId != -1) {
+            selectedStr += "producttypeid=" + selectedProductTypeId ;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (selectedProductFormId != -1) {
+            selectedStr += "productformid=" + selectedProductFormId;
+        }
+        window.location.href = newUrl + "?" + selectedStr;
+    };
+</script>
