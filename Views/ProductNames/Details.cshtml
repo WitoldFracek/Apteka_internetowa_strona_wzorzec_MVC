@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-6">
         <section>
-            <img src="@Html.DisplayFor(model => model.PhotoRelativePath)" width="500"/>
+            <img src="@Html.DisplayFor(model => model.PhotoRelativePath)" width="500" />
         </section>
     </div>
     <div class="col-md-6 col-md-offset-2">
@@ -58,10 +58,54 @@
 </div>
 
 
-<div>
-    
+@*<div>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
+
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<h3>Simmilar products</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th width="100">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th width="100"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SimilarProducts)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <img src="~/image/carts.png" height="40" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

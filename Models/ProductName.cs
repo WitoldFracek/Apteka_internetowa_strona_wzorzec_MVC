@@ -54,5 +54,8 @@ namespace PO_Projekt.Models
         public int ProductTypeId { get; set; }
         [Display(Name = "Type")]
         public ProductType ProductType { get; set; }
+
+        [NotMapped]
+        public List<ProductName> SimilarProducts { get; set; }
     }
 }

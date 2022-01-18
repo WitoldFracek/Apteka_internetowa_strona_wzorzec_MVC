@@ -69,6 +69,13 @@ namespace PO_Projekt.Controllers
                 return NotFound();
             }
 
+            IQueryable<ProductName> queryable = _context.ProductNames
+                            .Include(p => p.Manufacturer)
+                            .Include(p => p.ProductForm)
+                            .Include(p => p.ProductType)
+                            .Where(p => p.ProductType == productName.ProductType);
+            productName.SimilarProducts = queryable.ToList<ProductName>();
+
             return View(productName);
         }
 

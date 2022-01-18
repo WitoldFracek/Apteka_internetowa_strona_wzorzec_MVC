@@ -53,9 +53,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.ImageFilename)*@
-                        </th>
+                        <th></th>
                         <th>
                             @Html.DisplayNameFor(model => model.Name)
                         </th>
@@ -124,6 +122,19 @@
         }
     });
 
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    var addToShoppingCart = function (event, id) {
+        var strId = getCookie(id.ToString());
+        if (strId != "") {
+            var iId = parseInt(strId) + 1;
+            document.cookie = strId + "=" + iId.ToString();
+        }
+    }
 
     var setSelected = function (event) {
         var url = window.location.href;
