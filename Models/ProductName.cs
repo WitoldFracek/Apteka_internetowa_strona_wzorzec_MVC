@@ -29,6 +29,7 @@ namespace PO_Projekt.Models
         public double Price { get; set; }
 
         [Required]
+        [Display(Name = "Requires prescription")]
         public bool RequiresPrescription { get; set; }
 
         [Required]
@@ -46,10 +47,12 @@ namespace PO_Projekt.Models
         }
         [Required]
         public int ProductFormId { get; set; }
+        [Display(Name = "Form")]
         public ProductForm ProductForm { get; set; }
 
         [Required]
         public int ProductTypeId { get; set; }
+        [Display(Name = "Type")]
         public ProductType ProductType { get; set; }
     }
 }
