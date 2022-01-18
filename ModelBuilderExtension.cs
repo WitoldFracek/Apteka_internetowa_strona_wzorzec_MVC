@@ -35,6 +35,55 @@ namespace PO_Projekt
 
                 );
 
+            modelBuilder.Entity<ProductType>().HasData(
+                new ProductType()
+                {
+                    Id = 1,
+                    Name = "sprzęt medyczny"
+                },
+                new ProductType()
+                {
+                    Id = 2,
+                    Name = "kosmetyki"
+                },
+                new ProductType()
+                {
+                    Id = 3,
+                    Name = "suplementy"
+                },
+                new ProductType()
+                {
+                    Id = 4,
+                    Name = "przeciwbólowe"
+                },
+                new ProductType()
+                {
+                    Id = 5,
+                    Name = "antybiotyki"
+                },
+                new ProductType()
+                {
+                    Id = 6,
+                    Name = "przeziębienie"
+                },
+                new ProductType()
+                {
+                    Id = 7,
+                    Name = "dziecko"
+                },
+                new ProductType()
+                {
+                    Id = 8,
+                    Name = "leki"
+                },
+                new ProductType()
+                {
+                    Id = 9,
+                    Name = "inne"
+                }
+
+                );
+
             modelBuilder.Entity<ProductForm>().HasData(
                 new ProductForm()
                 {
@@ -221,7 +270,8 @@ namespace PO_Projekt
                     Description = "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni",
                     ManufacturerId = 1,
                     ImageFilename = "xanax.jpg",
-                    ProductFormId = 1
+                    ProductFormId = 1,
+                    ProductTypeId = 8
                 },
                 new ProductName()
                 {
@@ -232,7 +282,8 @@ namespace PO_Projekt
                     Description = "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.",
                     ManufacturerId = 3,
                     ImageFilename = "apap.jpg",
-                    ProductFormId = 1
+                    ProductFormId = 1,
+                    ProductTypeId = 6
                 },
                 new ProductName()
                 {
@@ -243,7 +294,8 @@ namespace PO_Projekt
                     Description = "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.",
                     ManufacturerId = 4,
                     ImageFilename = "opaska-elastyczna-tkana-z-zapinka.jpg",
-                    ProductFormId = 7
+                    ProductFormId = 7,
+                    ProductTypeId = 1
                 }
                 );
 

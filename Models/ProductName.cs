@@ -48,5 +48,8 @@ namespace PO_Projekt.Models
         public int ProductFormId { get; set; }
         public ProductForm ProductForm { get; set; }
 
+        [Required]
+        public int ProductTypeId { get; set; }
+        public ProductType ProductType { get; set; }
     }
 }
