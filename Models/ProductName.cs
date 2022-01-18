@@ -45,5 +45,10 @@ namespace PO_Projekt.Models
         {
             get { return ImageFilename != null && !ImageFilename.Equals("") ? IMAGE + ImageFilename : DefaultImage; }
         }
+
+        public int ProductFormId { get; set; }
+        [NotMapped]
+        public ProductForm ProductForm { get; set; }
+
     }
 }

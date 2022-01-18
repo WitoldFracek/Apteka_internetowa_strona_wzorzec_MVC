@@ -35,6 +35,45 @@ namespace PO_Projekt
 
                 );
 
+            modelBuilder.Entity<ProductForm>().HasData(
+                new ProductForm()
+                {
+                    Id = 1,
+                    Name = "Tabletka"
+                },
+                new ProductForm()
+                {
+                    Id = 2,
+                    Name = "Plaster"
+                },
+                new ProductForm()
+                {
+                    Id = 3,
+                    Name = "Saszetka"
+                },
+                new ProductForm()
+                {
+                    Id = 4,
+                    Name = "Zawiesina"
+                },
+                new ProductForm()
+                {
+                    Id = 5,
+                    Name = "Kapsułka"
+                },
+                new ProductForm()
+                {
+                    Id = 6,
+                    Name = "Proszek"
+                },
+                new ProductForm()
+                {
+                    Id = 7,
+                    Name = "Opatrunek"
+                }
+
+                );
+
             modelBuilder.Entity<User>().HasData(
                 new User()
                 {
@@ -181,7 +220,8 @@ namespace PO_Projekt
                     RequiresPrescription = true,
                     Description = "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni",
                     ManufacturerId = 1,
-                    ImageFilename = "xanax.jpg"
+                    ImageFilename = "xanax.jpg",
+                    ProductFormId = 1
                 },
                 new ProductName()
                 {
@@ -191,7 +231,8 @@ namespace PO_Projekt
                     RequiresPrescription = false,
                     Description = "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.",
                     ManufacturerId = 3,
-                    ImageFilename = "apap.jpg"
+                    ImageFilename = "apap.jpg",
+                    ProductFormId = 1
                 },
                 new ProductName()
                 {
@@ -201,7 +242,8 @@ namespace PO_Projekt
                     RequiresPrescription = false,
                     Description = "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.",
                     ManufacturerId = 4,
-                    ImageFilename = "opaska-elastyczna-tkana-z-zapinka.jpg"
+                    ImageFilename = "opaska-elastyczna-tkana-z-zapinka.jpg",
+                    ProductFormId = 7
                 }
                 );
 
