@@ -28,7 +28,6 @@ namespace PO_Projekt.Controllers
             ViewData["ManufacturerList"] = new SelectList(_context.Manufacturers, "Id", "Name", ManufacturerId);
 
             var shopContextFiltered = _context.ProductNames.Select(a => a);
-
             if(ProductTypeId != null)
             {
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductTypeId == ProductTypeId);
@@ -47,12 +46,11 @@ namespace PO_Projekt.Controllers
                 ViewData["SearchContent"] = SearchContent;
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.Name.Contains(SearchContent));
             }
-
             return View(await shopContextFiltered.ToListAsync());
         }
 
         // GET: ProductNames/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int? diff)
         {
             if (id == null)
             {
@@ -69,6 +67,30 @@ namespace PO_Projekt.Controllers
                 return NotFound();
             }
 
+            string sCount = Request.Cookies[id.ToString()];
+            int iCount = 0;
+            if (sCount != null)
+            {
+                iCount = int.Parse(sCount);
+            }
+            if (diff != null)
+            {
+                iCount += (int)diff;
+            }
+            if(iCount < 0)
+            {
+                iCount = 0;
+            }
+            if (iCount > 0)
+            {
+                Response.Cookies.Append(id.ToString(), iCount.ToString());
+            }
+            else
+            {
+                Response.Cookies.Delete(id.ToString());
+            }
+            productName.ShoppingCartCount = iCount;
+
             IQueryable<ProductName> queryable = _context.ProductNames
                             .Include(p => p.Manufacturer)
                             .Include(p => p.ProductForm)
@@ -76,7 +98,7 @@ namespace PO_Projekt.Controllers
                             .Where(p => p.ProductType == productName.ProductType);
             productName.SimilarProducts = queryable.ToList<ProductName>();
 
-            return View(productName);
+            return View("Details", productName);
         }
 
         // GET: ProductNames/Create
@@ -199,6 +221,15 @@ namespace PO_Projekt.Controllers
         private bool ProductNameExists(int id)
         {
             return _context.ProductNames.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> SubCartDetails(int? id)
+        {
+            return await Details(id, -1);
+        }
+        public async Task<IActionResult> AddCartDetails(int? id)
+        {
+            return await Details(id, 1);
         }
     }
 }

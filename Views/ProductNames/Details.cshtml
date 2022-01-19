@@ -49,8 +49,23 @@
                     @Html.DisplayNameFor(model => model.Price)
                 </dt>
                 <dd class="col-sm-8">
-                    <h5>@Html.DisplayFor(model => model.Price)</h5>
-
+                    <h5>
+                        @Html.DisplayFor(model => model.Price)
+                    </h5>
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ShoppingCartCount)
+                </dt>
+                <dd class="col-sm-8">
+                    <h5>
+                        <a asp-controller="ProductNames" asp-action="SubCartDetails" asp-route-id="@Model.Id">
+                            <img src="~/image/minus.png" height="25" />
+                        </a>
+                        @Model.ShoppingCartCount
+                        <a asp-controller="ProductNames" asp-action="AddCartDetails" asp-route-id="@Model.Id">
+                            <img src="~/image/plus.png" height="25" />
+                        </a>
+                    </h5>
                 </dd>
             </dl>
         </section>

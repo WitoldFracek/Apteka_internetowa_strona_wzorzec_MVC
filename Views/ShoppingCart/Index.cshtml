@@ -27,44 +27,45 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
-                    <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
-                </a>
-            </td>
-            <td>
-                <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </a>
-                
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                    </a>
+                </td>
+                <td>
+                    <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.RequiresPrescription)
-            </td>
-            <td align="right">
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="SubCart" asp-route-id="@item.Id"><img src="~/image/minus.png" height="25" /></a>
-            </td>
-            <td>
-                
-                @Html.DisplayFor(modelItem => item.ShoppingCartCount)
-                
-            </td>
-            <td>
-                <a asp-action="AddCart" asp-route-id="@item.Id"><img src="~/image/plus.png" height="25" /></a>
-            </td>
-            <td align="right">
-                @Html.DisplayFor(modelItem => item.ShoppingCartSumPrice)
-            </td>
-            <td>
-                <a asp-action="DelCart" asp-route-id="@item.Id"><img src="~/image/bin.png" height="25" /></a>
-            </td>
-        </tr>
-}
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiresPrescription)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="SubCart" asp-route-id="@item.Id"><img src="~/image/minus.png" height="25" /></a>
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.ShoppingCartCount)
+
+                </td>
+                <td>
+                    <a asp-action="AddCart" asp-route-id="@item.Id"><img src="~/image/plus.png" height="25" /></a>
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.ShoppingCartSumPrice)
+                </td>
+                <td>
+                    <a asp-action="DelCart" asp-route-id="@item.Id"><img src="~/image/bin.png" height="25" /></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

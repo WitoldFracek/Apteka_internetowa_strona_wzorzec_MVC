@@ -30,6 +30,10 @@ namespace PO_Projekt.Controllers
             var allCartArticles = _context.ProductNames
                 .Where<ProductName>(item => allCartIds.Contains(item.Id.ToString()))
                 ;
+            if (allCartArticles.ToList().Count == 0)
+            {
+                return View("CartEmpty");
+            }
 
             foreach(var article in allCartArticles)
             {
@@ -54,6 +58,20 @@ namespace PO_Projekt.Controllers
             return RedirectToAction("");
         }
 
+        public async Task<IActionResult> AddCartRedirect(int? id)
+        {
+            string sCount = Request.Cookies[id.ToString()];
+            int iCount = 0;
+            if (sCount != null)
+            {
+                iCount = int.Parse(sCount);
+            }
+            iCount += 1;
+
+            Response.Cookies.Append(id.ToString(), iCount.ToString());
+            return View("AddCartRedirect");
+        }
+
         public async Task<IActionResult> SubCart(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
@@ -70,6 +88,24 @@ namespace PO_Projekt.Controllers
                 Response.Cookies.Delete(id.ToString());
             }
             return RedirectToAction("");
+        }
+
+        public async Task<IActionResult> SubCartRedirect(int? id)
+        {
+            string sCount = Request.Cookies[id.ToString()];
+            int iCount = 1;
+            iCount = int.Parse(sCount);
+            iCount -= 1;
+
+            if (iCount > 0)
+            {
+                Response.Cookies.Append(id.ToString(), iCount.ToString());
+            }
+            else
+            {
+                Response.Cookies.Delete(id.ToString());
+            }
+            return View("AddCartRedirect");
         }
 
         public async Task<IActionResult> DelCart(int? id)

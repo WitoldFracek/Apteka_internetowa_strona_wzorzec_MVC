@@ -34,6 +34,9 @@ namespace PO_Projekt.Models
 
         [Required]
         public string Description { get; set; }
+
+        [NotMapped]
+        public string ShortenedDescription { get { return Description.Length > 100 ? Description.Substring(0, 97) + "..." : Description; } }
         public Manufacturer Manufacturer { get; set; }
         [Required]
         public int ManufacturerId { get; set; }

@@ -64,8 +64,8 @@
                             @Html.DisplayNameFor(model => model.Price)
                         </th>
                         @*<th>
-                                @Html.DisplayNameFor(model => model.RequiresPrescription)
-                            </th>*@
+                            @Html.DisplayNameFor(model => model.RequiresPrescription)
+                        </th>*@
                         <th width="100"></th>
                     </tr>
                 </thead>
@@ -84,26 +84,19 @@
                                 </a>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Description)
+                                @Html.DisplayFor(modelItem => item.ShortenedDescription)
                             </td>
                             <td align="right">
                                 @Html.DisplayFor(modelItem => item.Price)
                             </td>
                             @*<td>
-                                    @Html.DisplayFor(modelItem => item.RequiresPrescription)
-                                </td>*@
-                            <td>
-                                <button onclick="addToShoppingCart(@item.Id)">Add to cart</button>
-                                <a asp-controller="ShoppingCart" asp-action="AddCart" asp-route-id="@item.Id">
-                                    <img src="~/image/carts.png" height="40" />
-                                </a>
-                                @*<a asp-action="Edit" asp-route-id="@item.Id">-</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id">+</a>*@
-
-                                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-                            </td>
+                                @Html.DisplayFor(modelItem => item.RequiresPrescription)
+                            </td>*@
+                        <td>
+                            <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
+                                <img src="~/image/carts.png" height="40" />
+                            </a>
+                        </td>
                         </tr>
                     }
                 </tbody>
@@ -130,15 +123,12 @@
         return "";
     }
 
-    var addToShoppingCart = function (id) {
-        var strId = getCookie(id.ToString());
-        if (strId != "") {
-            var iId = parseInt(strId) + 1;
-            document.cookie = strId + "=" + iId.ToString();
-        }
-        else {
-            document.cookie = strId + "=1";
-        }
+    var addToShoppingCart = function (event, id) {
+        var url = window.location.href;
+        var elems = url.split("/");
+        var newUrl = elems[0] + "/" + elems[1] + "/" + elems[2];
+        TempData["CurrentUrl"] = newUrl + "/ProductNames";
+        window.location.href = newUrl + "/ShoppingCart/AddCart?id=" + id;
     }
 
     var setSelected = function (event) {
@@ -179,5 +169,6 @@
             selectedStr += "searchcontent=" + searchContent;
         }
         window.location.href = newUrl + "?" + selectedStr;
+        
     };
 </script>
