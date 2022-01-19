@@ -51,13 +51,13 @@
                 <div class="form-group form-check">
                     
                     <label class="form-check-label">
-                        @if (ViewBag.Prescription=="true")
+                        @if (ViewBag.Prescription == "true")
                         {
-                            <input type="checkbox" id="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" checked/>
+                            <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" checked/>
                         }
                         else
                         {
-                            <input type="checkbox" id="PrescriptionButton" class="form-check-input" onchange="setSelected(event)"/>
+                            <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)"/>
                         }
 
                     </label>
@@ -157,12 +157,12 @@
         var liProductFormList = document.getElementById('ProductFormList');
         var liManufacturerList = document.getElementById('ManufacturerList');
         var SearchContentInput = document.getElementById('SearchContentInput');
-        var PrescriptionButton = document.getElementById('PrescriptionButton');
+        var PrescriptionButton = document.querySelector('#PrescriptionButton');
         var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
         var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
         var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
         var searchContent = SearchContentInput.value;
-        var prescriptionValue = PrescriptionButton.value;
+        var PrescriptionVal = PrescriptionButton.checked;
 
         var selectedStr = ""
         if (selectedProductTypeId != -1) {
@@ -183,20 +183,13 @@
         if (selectedStr != "") {
             selectedStr += "&"
         }
-        if (prescriptionValue == "on") {
-            selectedStr += "prescriptionvalue=" + true;
-        }
-        else {
-            selectedStr += "prescriptionvalue=" + false;
-        }
-        if (selectedStr != "") {
-            selectedStr += "&"
-        }
+        selectedStr += "prescriptionvalue=" + PrescriptionVal;
+        selectedStr += "&"
         if (searchContent != "") {
             searchContent = searchContent.replace(' ', '+')
             selectedStr += "searchcontent=" + searchContent;
         }
         window.location.href = newUrl + "?" + selectedStr;
-        
+
     };
 </script>
