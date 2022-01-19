@@ -46,80 +46,83 @@
                     <option value="-1">All manufacturers</option>
                 </select>
             </p>
-            <h4>@Html.DisplayNameFor(model => model.RequiresPrescription)</h4>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    @if (ViewBag.Prescription == "true")
+                    {
+                        <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" />
+                    }
+                    Prescription
+                </label>
+            </div>
+            <h4>Sorters</h4>
             <p>
-                <div class="form-group form-check">
-                    
-                    <label class="form-check-label">
-                        @if (ViewBag.Prescription == "true")
-                        {
-                            <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" checked/>
-                        }
-                        else
-                        {
-                            <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)"/>
-                        }
-
-                    </label>
-                </div>
+                <select class="form-control" id="SortersList" asp-items="ViewBag.SortersList"
+                        onchange="setSelected(event)">
+                    <option value="-1">None selected</option>
+                </select>
             </p>
         </section>
-    </div>
-    <div class="col-md-10 col-md-offset-2">
-        <section>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th width="400">
-                            @Html.DisplayNameFor(model => model.Description)
-                        </th>
-                        <th width="100">
-                            @Html.DisplayNameFor(model => model.Price)
-                        </th>
-                        @*<th>
-                            @Html.DisplayNameFor(model => model.RequiresPrescription)
-                        </th>*@
-                        <th width="100"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.Id">
-                                    <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.Id">
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </a>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ShortenedDescription)
-                            </td>
-                            <td align="right">
-                                @Html.DisplayFor(modelItem => item.Price)
-                            </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.RequiresPrescription)
-                            </td>*@
-                        <td>
-                            <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
-                                <img src="~/image/carts.png" height="40" />
-                            </a>
-                        </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </section>
-    </div>
+            </div>
+            <div class="col-md-10 col-md-offset-2">
+                <section>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th width="400">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th width="100">
+                                    @Html.DisplayNameFor(model => model.Price)
+                                </th>
+                                @*<th>
+                                @Html.DisplayNameFor(model => model.RequiresPrescription)
+                            </th>*@
+                                <th width="100"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                            <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShortenedDescription)
+                                    </td>
+                                    <td align="right">
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    @*<td>
+                                    @Html.DisplayFor(modelItem => item.RequiresPrescription)
+                                </td>*@
+                                    <td>
+                                        <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
+                                            <img src="~/image/carts.png" height="40" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
 </div>
 
 
@@ -156,11 +159,13 @@
         var liProductTypeList = document.getElementById('ProductTypeList');
         var liProductFormList = document.getElementById('ProductFormList');
         var liManufacturerList = document.getElementById('ManufacturerList');
+        var liSortersList = document.getElementById('SortersList');
         var SearchContentInput = document.getElementById('SearchContentInput');
         var PrescriptionButton = document.querySelector('#PrescriptionButton');
         var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
         var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
         var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
+        var selectedSorterId = liSortersList.options[liSortersList.selectedIndex].value;
         var searchContent = SearchContentInput.value;
         var PrescriptionVal = PrescriptionButton.checked;
 
@@ -179,6 +184,12 @@
         }
         if (selectedManufacturerId != -1) {
             selectedStr += "manufacturerid=" + selectedManufacturerId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (selectedSorterId != -1) {
+            selectedStr += "sorterid=" + selectedSorterId;
         }
         if (selectedStr != "") {
             selectedStr += "&"

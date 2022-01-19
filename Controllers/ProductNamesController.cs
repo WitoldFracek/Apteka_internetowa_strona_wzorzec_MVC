@@ -20,12 +20,18 @@ namespace PO_Projekt.Controllers
         }
 
         // GET: ProductNames
-        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue)
+        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue, int? SorterId)
         {
             var shopDbContext = _context.ProductNames.Include(p => p.Manufacturer).Include(p => p.ProductForm).Include(p => p.ProductType);
             ViewData["ProductTypeList"] = new SelectList(_context.ProductTypes, "Id", "Name", ProductTypeId);
             ViewData["ProductFormList"] = new SelectList(_context.ProductForms, "Id", "Name", ProductFormId);
             ViewData["ManufacturerList"] = new SelectList(_context.Manufacturers, "Id", "Name", ManufacturerId);
+            ViewData["SortersList"] = new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Selected = false, Text = "Price down", Value = "0" },
+                    new SelectListItem { Selected = false, Text = "Price up", Value = "1" },
+                }, "Value", "Text", SorterId);
 
             var shopContextFiltered = _context.ProductNames.Select(a => a);
             if(ProductTypeId != null)
@@ -39,6 +45,14 @@ namespace PO_Projekt.Controllers
             if (ManufacturerId != null)
             {
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ManufacturerId == ManufacturerId);
+            }
+            if (SorterId == 0)
+            {
+                shopContextFiltered = shopContextFiltered.OrderByDescending(item => item.Price);
+            }
+            if (SorterId == 1)
+            {
+                shopContextFiltered = shopContextFiltered.OrderBy(item => item.Price);
             }
             if (SearchContent != null && SearchContent != "")
             {
