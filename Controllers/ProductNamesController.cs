@@ -22,6 +22,20 @@ namespace PO_Projekt.Controllers
         // GET: ProductNames
         public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue, int? SorterId)
         {
+            var allCartIds = Request.Cookies.Select(item => item.Key).ToList();
+            var allCartArticles = _context.ProductNames
+                .Where<ProductName>(item => allCartIds.Contains(item.Id.ToString()))
+                ;
+            int count = 0;
+            foreach (var article in allCartArticles)
+            {
+                count += Int32.Parse(Request.Cookies[article.Id.ToString()]);
+            }
+            if(count > 0)
+            {
+                ViewData["CartCount"] = count;
+            }            
+
             var shopDbContext = _context.ProductNames.Include(p => p.Manufacturer).Include(p => p.ProductForm).Include(p => p.ProductType);
             ViewData["ProductTypeList"] = new SelectList(_context.ProductTypes, "Id", "Name", ProductTypeId);
             ViewData["ProductFormList"] = new SelectList(_context.ProductForms, "Id", "Name", ProductFormId);
@@ -76,6 +90,29 @@ namespace PO_Projekt.Controllers
         // GET: ProductNames/Details/5
         public async Task<IActionResult> Details(int? id, int? diff)
         {
+            var allCartIds = Request.Cookies.Select(item => item.Key).ToList();
+            var allCartArticles = _context.ProductNames
+                .Where<ProductName>(item => allCartIds.Contains(item.Id.ToString()))
+                ;
+            int count = 0;
+            foreach (var article in allCartArticles)
+            {
+                count += Int32.Parse(Request.Cookies[article.Id.ToString()]);
+            }
+            if (diff != null)
+            {
+                count += (int)diff;
+            }
+            if (count < 0)
+            {
+                count = 0;
+            }
+            if (count > 0)
+            {
+                ViewData["CartCount"] = count;
+            }
+            
+
             if (id == null)
             {
                 return NotFound();

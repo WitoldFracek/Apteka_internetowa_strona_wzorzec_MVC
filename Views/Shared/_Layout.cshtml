@@ -51,8 +51,15 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
-                                <img src="~/image/carts.png" height="40" />
+                                <div class="mycontainer">
+                                    <img src="~/image/carts.png" height="40" />
+                                    
+                                    <div class="cartcount">
+                                        @ViewBag.CartCount
+                                    </div>
+                                </div>
                             </a>
+                            
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
@@ -86,3 +93,16 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+    .mycontainer {
+        position: relative;
+        text-align: center;
+    }
+
+    .cartcount {
+        position: absolute;
+        top: 80%;
+        left: 95%;
+    }
+</style>

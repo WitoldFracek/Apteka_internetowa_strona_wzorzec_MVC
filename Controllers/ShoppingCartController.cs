@@ -34,12 +34,14 @@ namespace PO_Projekt.Controllers
             {
                 return View("CartEmpty");
             }
-
+            int count = 0;
             foreach(var article in allCartArticles)
             {
                 article.ShoppingCartCount = Int32.Parse(Request.Cookies[article.Id.ToString()]);
                 article.ShoppingCartSumPrice = article.Price * article.ShoppingCartCount;
+                count += article.ShoppingCartCount;
             }
+            ViewData["CartCount"] = count;
 
             return View(await allCartArticles.ToListAsync());
         }
