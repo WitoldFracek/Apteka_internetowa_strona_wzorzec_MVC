@@ -20,7 +20,7 @@ namespace PO_Projekt.Controllers
         }
 
         // GET: ProductNames
-        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent)
+        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue)
         {
             var shopDbContext = _context.ProductNames.Include(p => p.Manufacturer).Include(p => p.ProductForm).Include(p => p.ProductType);
             ViewData["ProductTypeList"] = new SelectList(_context.ProductTypes, "Id", "Name", ProductTypeId);
@@ -45,6 +45,16 @@ namespace PO_Projekt.Controllers
                 SearchContent = SearchContent.Replace('+', ' ');
                 ViewData["SearchContent"] = SearchContent;
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.Name.Contains(SearchContent));
+            }
+            if (PrescriptionValue == "true")
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == true);
+                ViewData["Prescription"] = "true";
+            }
+            else
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == false);
+                ViewData["Prescription"] = "false";
             }
             return View(await shopContextFiltered.ToListAsync());
         }

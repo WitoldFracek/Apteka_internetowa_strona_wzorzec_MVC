@@ -46,6 +46,23 @@
                     <option value="-1">All manufacturers</option>
                 </select>
             </p>
+            <h4>@Html.DisplayNameFor(model => model.RequiresPrescription)</h4>
+            <p>
+                <div class="form-group form-check">
+                    
+                    <label class="form-check-label">
+                        @if (ViewBag.Prescription=="true")
+                        {
+                            <input type="checkbox" id="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" checked/>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="PrescriptionButton" class="form-check-input" onchange="setSelected(event)"/>
+                        }
+
+                    </label>
+                </div>
+            </p>
         </section>
     </div>
     <div class="col-md-10 col-md-offset-2">
@@ -140,10 +157,12 @@
         var liProductFormList = document.getElementById('ProductFormList');
         var liManufacturerList = document.getElementById('ManufacturerList');
         var SearchContentInput = document.getElementById('SearchContentInput');
+        var PrescriptionButton = document.getElementById('PrescriptionButton');
         var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
         var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
         var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
         var searchContent = SearchContentInput.value;
+        var prescriptionValue = PrescriptionButton.value;
 
         var selectedStr = ""
         if (selectedProductTypeId != -1) {
@@ -160,6 +179,15 @@
         }
         if (selectedManufacturerId != -1) {
             selectedStr += "manufacturerid=" + selectedManufacturerId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (prescriptionValue == "on") {
+            selectedStr += "prescriptionvalue=" + true;
+        }
+        else {
+            selectedStr += "prescriptionvalue=" + false;
         }
         if (selectedStr != "") {
             selectedStr += "&"
