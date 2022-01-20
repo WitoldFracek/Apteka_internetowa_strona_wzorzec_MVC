@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="ProductNames" asp-action="Index">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/image/caduceus.png" height="40" />APTEKA
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,28 +19,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @*@{ 
-                            foreach(var tupleVar in new List<Tuple<int, string>>
-                                {
-                                    Tuple.Create( 1, "sprzęt medyczny" ),
-                                    Tuple.Create( 2, "kosmetyki" ),
-                                    Tuple.Create( 3, "suplementy" ),
-                                    Tuple.Create( 4, "przeciwbólowe" ),
-                                    Tuple.Create( 5, "antybiotyki" ),
-                                    Tuple.Create( 6, "przeziębienie" ),
-                                    Tuple.Create( 7, "dziecko" ),
-                                    Tuple.Create( 8, "leki" ),
-                                    Tuple.Create( 9, "inne" ),
-                                })
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ProductNames" asp-action="Index" 
-                                       asp-route-producttypeid="@tupleVar.Item1">@tupleVar.Item2</a>
-                                </li>
-                            }
-                        }*@ 
-                        
+                    <ul class="navbar-nav flex-grow-1">                       
                         
                     </ul>
                     <ul class="navbar-nav">
@@ -82,11 +61,11 @@
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - PO_Projekt - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; Apteka internetowa - Infolinia: 800 110 110
         </div>
-    </footer>*@
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
