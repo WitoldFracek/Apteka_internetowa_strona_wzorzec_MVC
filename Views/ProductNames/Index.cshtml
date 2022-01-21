@@ -10,6 +10,7 @@
         <a asp-action="Create">Create New</a>
     </p>*@
 
+
 <div class="row">
     <div class="col-md-11">
         <section>
@@ -23,7 +24,9 @@
     </div>
 </div>
 <br />
-
+<p>
+    <img src="~/image/ad_l.png" style="max-width: 100%" />
+</p>
 <div class="row">
     <div class="col-md-2">
         <section>
@@ -66,9 +69,18 @@
                     <option value="-1">None selected</option>
                 </select>
             </p>
-            <a class="btn btn-primary form-control" asp-area="" asp-controller="ProductNames" asp-action="Index">
-                Reset
-            </a>
+            <p>
+                <a class="btn btn-primary form-control" asp-area="" asp-controller="ProductNames" asp-action="Index">
+                    Reset
+                </a>
+            </p>
+            <p>
+                <img src="~/image/ad_h.png" style="max-width: 100%" />
+            </p>
+            <p>
+                <img src="~/image/ad_h2.png" style="max-width: 100%" />
+            </p>
+            
         </section>
             </div>
     @if(Model.Count() != 0) { 
