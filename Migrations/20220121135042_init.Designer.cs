@@ -10,7 +10,7 @@ using PO_Projekt.Data;
 namespace PO_Projekt.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20220118143658_init")]
+    [Migration("20220121135042_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -323,7 +323,7 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 4,
-                            Name = "Zawiesina"
+                            Name = "Syrop"
                         },
                         new
                         {
@@ -333,12 +333,17 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 6,
-                            Name = "Proszek"
+                            Name = "Maść"
                         },
                         new
                         {
                             Id = 7,
                             Name = "Opatrunek"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Inne"
                         });
                 });
 
@@ -361,8 +366,8 @@ namespace PO_Projekt.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -445,6 +450,126 @@ namespace PO_Projekt.Migrations
                             Price = 6.9900000000000002,
                             ProductFormId = 1,
                             ProductTypeId = 8,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "To wyrób medyczny, z opatrunkiem do cięcia, który chroni przed zarazkami i zabrudzeniem. Utrzymuje skórę w czystości, nie powoduje uczuleń i nie przywiera do rany. Rozmiar: 1 m x 6 cm.",
+                            ImageFilename = "plastry.png",
+                            ManufacturerId = 3,
+                            Name = "Plaster z opatrunkiem, tkaninowy, 1 m x 6 cm, 1 szt.",
+                            Price = 5.9900000000000002,
+                            ProductFormId = 2,
+                            ProductTypeId = 9,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Kremowy szampon i płyn do kąpieli – w łagodny sposób myje oraz pielęgnuje skórę i włosy dziecka. Kosmetyk może być stosowany już od pierwszego dnia życia maluszka. Szampon w swoim składzie zawiera między innymi: bisabolol, który łagodzi podrażnienia.",
+                            ImageFilename = "baby_care.png",
+                            ManufacturerId = 4,
+                            Name = "Pikabu Baby Care, kremowy szampon i płyn do kąpieli, 300 ml",
+                            Price = 24.989999999999998,
+                            ProductFormId = 8,
+                            ProductTypeId = 7,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Fervex Junior to lek w postaci granulatu do sporządzania roztworu doustnego dla dzieci od 6 roku życia. Ma działanie przeciwbólowe i przeciwgorączkowe, udrażnia przewody nosowe, hamuje odruch kichania i łzawienie oczu, uzupełnia niedobory witaminy C.",
+                            ImageFilename = "fervex.png",
+                            ManufacturerId = 1,
+                            Name = "Fervex Junior, granulat bez cukru, 8 saszetek",
+                            Price = 19.190000000000001,
+                            ProductFormId = 3,
+                            ProductTypeId = 6,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Doustnie. Dawkę i częstotliwość przyjmowania preparatu ustala lekarz. Lek należy przyjąć jak najszybciej po wystąpieniu objawów migreny. Jeśli ból nie ustąpił dawkę można powtórzyć po upływie 2 godzin. Tabletki należy połykać w całości, popijając wodą.",
+                            ImageFilename = "",
+                            ManufacturerId = 3,
+                            Name = "Sumatriptan Medical Valley, 50 mg, tabletki, 6 szt.",
+                            Price = 25.59,
+                            ProductFormId = 1,
+                            ProductTypeId = 8,
+                            RequiresPrescription = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "",
+                            ImageFilename = "",
+                            ManufacturerId = 4,
+                            Name = "Cital, 20 mg, tabletki powlekane, 60 szt.",
+                            Price = 36.990000000000002,
+                            ProductFormId = 1,
+                            ProductTypeId = 8,
+                            RequiresPrescription = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "suplement diety w formie płynu, który uzupełnia codzienną dietę w magnez i witaminę B6. Produkt przeznaczony dla dzieci od 3 roku życia i osób dorosłych.",
+                            ImageFilename = "syrop.png",
+                            ManufacturerId = 3,
+                            Name = "JuniorMag, płyn, smak truskawkowy, 120 ml",
+                            Price = 13.99,
+                            ProductFormId = 4,
+                            ProductTypeId = 3,
+                            RequiresPrescription = false
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "InVag to produkt leczniczy zawierający bakterie kwasy mlekowego, które przywracają równowagę pH pochwy do stosowania w zaburzeń mikroflory spowodowanej m.in. stosowaniem antybiotyków czy zmianami hormonalnymi.",
+                            ImageFilename = "p_antybiotyk.png",
+                            ManufacturerId = 2,
+                            Name = "InVag, kapsułki twarde, dopochwowe, 7 szt.",
+                            Price = 34.990000000000002,
+                            ProductFormId = 1,
+                            ProductTypeId = 5,
+                            RequiresPrescription = true
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "Tribiotic to produkt leczniczy zawierający 3 antybiotyki, które wykazują działanie przeciwbakteryjne. Lek do stosowania w przypadku zadrapań, ran, oparzeń.",
+                            ImageFilename = "m_antybiotyk.png",
+                            ManufacturerId = 4,
+                            Name = "Tribiotic",
+                            Price = 16.59,
+                            ProductFormId = 6,
+                            ProductTypeId = 5,
+                            RequiresPrescription = true
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "Polibiotic to produkt leczniczy zawierający 3 antybiotyki działające w przypadku zakażeń skórnych, maść do stosowania w przypadku ran, owrzodzeń i oparzeń.",
+                            ImageFilename = "m_antybiotyk_2.png",
+                            ManufacturerId = 1,
+                            Name = "Polibiotic, (5 mg+5000 j.m.+400 j.m.g), maść, 15 g (tuba)",
+                            Price = 11.890000000000001,
+                            ProductFormId = 6,
+                            ProductTypeId = 5,
+                            RequiresPrescription = true
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "suplement diety wspomagający układ odpornościowy. Produkt przeznaczony dla osób dorosłych.",
+                            ImageFilename = "witamina_c.png",
+                            ManufacturerId = 2,
+                            Name = "Witamina C 1000 mg Forte, tabletki do ssania, smak pomarańczowy, 60 szt.",
+                            Price = 14.99,
+                            ProductFormId = 1,
+                            ProductTypeId = 3,
                             RequiresPrescription = false
                         });
                 });
