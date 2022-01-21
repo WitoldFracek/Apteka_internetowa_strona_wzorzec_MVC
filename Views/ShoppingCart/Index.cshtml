@@ -18,7 +18,7 @@
                     </th>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.RequiresPrescription)
+                        Prescription
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Price)
@@ -47,7 +47,16 @@
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.RequiresPrescription)
+                            @if (item.RequiresPrescription)
+                            {
+                                <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">Add</a>
+                            }
+                            else
+                            {
+                                <p>
+                                    does not apply
+                                </p>
+                            }
                         </td>
                         <td align="right">
                             @Html.DisplayFor(modelItem => item.Price)
@@ -83,20 +92,20 @@
             {
                 allSum += item.ShoppingCartSumPrice;
             }
-                <p>
-                    <h5 align="center">sum:</h5>
-                    <h2 align="right">@Html.FormatValue(allSum, "{0:N2} zł")</h2>
-                    <h5 align="right">+ shipping</h5>
-                </p>
-            
+            <p>
+                <h5 align="center">sum:</h5>
+                <h2 align="right">@Html.FormatValue(allSum, "{0:N2} zł")</h2>
+                <h5 align="right">+ shipping</h5>
+            </p>
+
         }
         <p>
             <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">Continue shopping</a>
         </p>
         <p>
-            <a class="btn btn-primary form-control">FINISH</a>
+            <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">BUY</a>
         </p>
-        
+
     </section>
 </div>
 </div>
