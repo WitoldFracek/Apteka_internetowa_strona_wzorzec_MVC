@@ -32,7 +32,7 @@ namespace PO_Projekt.Controllers
                 ;
             if (allCartArticles.ToList().Count == 0)
             {
-                return View("CartEmpty");
+                return View("CartEmpty", _context.ProductNames);
             }
             int count = 0;
             foreach(var article in allCartArticles)

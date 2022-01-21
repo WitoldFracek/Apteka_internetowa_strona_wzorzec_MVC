@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<PO_Projekt.Models.ProductName>
 
 @{
     ViewData["Title"] = "Shopping cart";
@@ -10,3 +6,39 @@
 
 <h1>Shopping cart</h1>
 <h4>Shopping cart is empty.</h4>
+<div class="navbar-nav flex-grow-1">
+    <br />
+    <img src="~/image/ad.png" />
+    <br />
+    <h4>Popular products</h4>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortenedDescription)
+                    </td>
+                    <td align="right">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-controller="ShoppingCart" asp-action="AddCart" asp-route-id="@item.Id">
+                            <img src="~/image/carts.png" height="40" />
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
