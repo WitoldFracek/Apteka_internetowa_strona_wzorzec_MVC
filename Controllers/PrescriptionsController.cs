@@ -43,8 +43,17 @@ namespace PO_Projekt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SearchPrescription([Bind("Code,Pesel")] Prescription pres)
         {
-            
             var addedPrescriptions = await GetStoredPrescriptions();
+            if (pres.Code.ToString().StartsWith("9"))
+            {
+                ViewData["NoPrescription"] = "Nie znaleziono żadnych recept 😢";
+                var first = addedPrescriptions.First();
+                first.PrescriptionList = addedPrescriptions;
+                first.Code = -1;
+
+                return View("Index", first);
+            }
+            
             var generatedPrescription = new Prescription
             {
                 PrescriptionCode = pres.Code,

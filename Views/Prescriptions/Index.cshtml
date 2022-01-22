@@ -72,7 +72,7 @@
         </table>
     </div>
 </div>
-<div class="row empty"></div>
+<div class="row empty"><p class="text-danger">@ViewData["NoPrescription"]</p></div>
 <div class="row">
     @if (Model.Code != -1)
     {
@@ -104,8 +104,8 @@
             </table>
         </div>
     }
+    <img src="~/image/ad.png" style="margin-top: 20px" />
 </div>
-<img src="~/image/ad.png" />
 
 <style>
     .bordered {
