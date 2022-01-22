@@ -1,4 +1,4 @@
-﻿@model (List<Prescription>, SearchPrescriptionData, Prescription)
+﻿@model Prescription
 
 @{
     ViewData["Title"] = "Recepty";
@@ -10,13 +10,13 @@
             <form asp-action="SearchPrescription">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Item2.Id" class="control-label">Kod recepty</label>
-                    <input asp-for="Item2.Id" class="form-control" />
+                    <label asp-for="Code" class="control-label">Kod recepty</label>
+                    <input asp-for="Code" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Item2.Pesel" class="control-label">Pesel</label>
-                    <input asp-for="Item2.Pesel" class="form-control" />
-                    <span asp-validation-for="Item2.Pesel" class="text-danger"></span>
+                    <label asp-for="Pesel" class="control-label">Pesel</label>
+                    <input asp-for="Pesel" class="form-control" />
+                    <span asp-validation-for="Pesel" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Wyszukaj" class="btn btn-primary" />
@@ -27,7 +27,7 @@
     <div class="col-9 bordered">
         <h3 class="display-4 text-center">Dostępne recepty</h3>
         <p></p>
-        @if (Model.Item1.Count() == 0)
+        @if (Model.PrescriptionList.Count() == 0)
         {
             <p class="text-danger">Brak zapisanych recept</p>
         }
@@ -49,7 +49,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var pres in Model.Item1)
+                @foreach (var pres in Model.PrescriptionList)
                 {
                     <tr>
                         <td>
@@ -62,7 +62,7 @@
                             @pres.EndDate.ToString("dd.MM.yyyy")
                         </td>
                         <td>
-                            <a asp-action="RemovePrescription" asp-route-code="@pres.PrescriptionCode">
+                            <a asp-action="RemovePrescription" asp-route-id="@pres.Id">
                                 <img src="~/image/bin.png" height="30" />
                             </a>
                         </td>
@@ -74,7 +74,7 @@
 </div>
 <div class="row empty"></div>
 <div class="row">
-    @if (Model.Item3.Id != -1)
+    @if (Model.Code != -1)
     {
         <div class="col-12 bordered">
             <table class="table">
@@ -88,24 +88,24 @@
                 <tbody>
                     <tr>
                         <td>
-                            @Html.DisplayFor(model => model.Item3.PrescriptionCode)
+                            @Html.DisplayFor(model => model.PrescriptionCode)
                         </td>
                         <td>
-                            @Model.Item3.StartDate.ToString("dd.MM.yyyy")
+                            @Model.StartDate.ToString("dd.MM.yyyy")
                         </td>
                         <td>
-                            @Model.Item3.EndDate.ToString("dd.MM.yyyy")
+                            @Model.EndDate.ToString("dd.MM.yyyy")
                         </td>
                         <td>
-                            <a asp-action="AddPrescription" asp-route-code="@Model.Item3.PrescriptionCode" asp-route-startdate="@Model.Item3.StartDate" asp-route-enddate="@Model.Item3.EndDate">Dodaj</a>
+                            <a asp-action="AddPrescription" asp-route-code="@Model.PrescriptionCode" asp-route-startdate="@Model.StartDate.ToString("dd.MM.yyyy")" asp-route-enddate="@Model.EndDate.ToString("dd.MM.yyyy")">Dodaj</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     }
-
 </div>
+<img src="~/image/ad.png" />
 
 <style>
     .bordered {

@@ -393,13 +393,15 @@ namespace PO_Projekt
                 {
                     Id = 1,
                     ProductId = 11,
-                    OrderId = 4
+                    OrderId = 4,
+                    Count = 1
                 },
                 new ProductOrder()
                 {
                     Id = 2,
                     ProductId = 1,
-                    OrderId = 3
+                    OrderId = 3,
+                    Count = 2,
                 }
                 );
 

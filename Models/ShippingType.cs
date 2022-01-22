@@ -10,6 +10,7 @@ namespace PO_Projekt.Models
         ParcelLocker = 1,
         PostOffice = 2,
         Delivery = 3,
-        LocalStore = 4
+        LocalStore = 4,
+        SelfPickup = 5,
     }
 }

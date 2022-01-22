@@ -20,5 +20,8 @@ namespace PO_Projekt.Models
         public Product Order { get; set; }
         [Required]
         public int OrderId { get; set; }
+
+        [Required]
+        public int Count { get; set; }
     }
 }

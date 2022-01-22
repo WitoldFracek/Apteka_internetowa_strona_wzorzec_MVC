@@ -23,8 +23,15 @@ namespace PO_Projekt.Controllers
         public async Task<IActionResult> Index()
         {
             var addedPrescriptions = await GetStoredPrescriptions();
+            var firstPrescription = new Prescription();
+            if(addedPrescriptions.Count() != 0)
+            {
+                firstPrescription = addedPrescriptions.First();
+                firstPrescription.PrescriptionList = addedPrescriptions;
+            }
+            firstPrescription.Code = -1;
 
-            return View((addedPrescriptions, new SearchPrescriptionData(), new Prescription() { Id = -1}));
+            return View(firstPrescription);
         }
 
         public IActionResult SearchPrescription()
@@ -34,18 +41,58 @@ namespace PO_Projekt.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SearchPrescription([Bind("Id,Pesel")] SearchPrescriptionData presData)
+        public async Task<IActionResult> SearchPrescription([Bind("Code,Pesel")] Prescription pres)
         {
-            Console.WriteLine(presData.Id);
-            Console.WriteLine(presData.Pesel);
+            
             var addedPrescriptions = await GetStoredPrescriptions();
             var generatedPrescription = new Prescription
             {
-                PrescriptionCode = presData.Id,
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(new Random().Next(10, 21))
+                PrescriptionCode = pres.Code,
+                StartDate = DateTime.Now.AddDays(new Random().Next(0, 10)),
+                EndDate = DateTime.Now.AddDays(new Random().Next(20, 41))
             };
-            return View("Index", (addedPrescriptions, presData, generatedPrescription));
+            generatedPrescription.PrescriptionList = addedPrescriptions;
+            return View("Index", generatedPrescription);
+        }
+
+        public async Task<IActionResult> AddPrescription(int? code, string startdate, string enddate)
+        {
+            var newPrescription = new Prescription();
+            if (!code.HasValue)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var startDate = DateTime.Parse(startdate);
+            var endDate = DateTime.Parse(enddate);
+            newPrescription.StartDate = startDate;
+            newPrescription.EndDate = endDate;
+            newPrescription.PrescriptionCode = code.Value;
+            newPrescription.UserId = userId;
+
+            _context.Prescriptions.Add(newPrescription);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        
+        public async Task<IActionResult> RemovePrescription(int? id)
+        {
+            Console.WriteLine(id);
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var prescription = await _context.Prescriptions.FirstOrDefaultAsync(p => p.Id == id);
+            if (prescription == null)
+            {
+                return NotFound();
+            }
+
+            _context.Prescriptions.Remove(prescription);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         private async Task<List<Prescription>> GetStoredPrescriptions()

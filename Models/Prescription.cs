@@ -22,6 +22,16 @@ namespace PO_Projekt.Models
         [ForeignKey("UserId")]
         public User User { get; set; }
 
+        [NotMapped]
+        public List<Prescription> PrescriptionList { get; set; }
+        [NotMapped]
+        [Required]
+        public int Code { get; set; }
+        [NotMapped]
+        [Required]
+        [RegularExpression(@"\d{11}", ErrorMessage = "Niepoprawna wartość numeru pesel.")]
+        public string Pesel { get; set; }
+
 
     }
 }
