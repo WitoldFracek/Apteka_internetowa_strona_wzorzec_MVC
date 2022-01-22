@@ -1,0 +1,104 @@
+﻿@model IEnumerable<PO_Projekt.Models.ProductName>
+
+@{
+    ViewData["Title"] = "Shopping cart";
+}
+
+<h1>Shopping cart</h1>
+<div class="row">
+<div class="col-md-9">
+    <section>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.RequiresPrescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th width="1"></th>
+                    <th width="1"></th>
+                    <th width="1"></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
+                                <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequiresPrescription)
+                        </td>
+                        <td align="right">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            <a asp-action="SubCart" asp-route-id="@item.Id"><img src="~/image/minus.png" height="25" /></a>
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.ShoppingCartCount)
+
+                        </td>
+                        <td>
+                            <a asp-action="AddCart" asp-route-id="@item.Id"><img src="~/image/plus.png" height="25" /></a>
+                        </td>
+                        <td align="right">
+                            @Html.DisplayFor(modelItem => item.ShoppingCartSumPrice)
+                        </td>
+                        <td>
+                            <a asp-action="DelCart" asp-route-id="@item.Id"><img src="~/image/bin.png" height="25" /></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>
+<div class="col-md-3 col-md-offset-2">
+    <section>
+        @{
+            double allSum = 0;
+            foreach (var item in Model)
+            {
+                allSum += item.ShoppingCartSumPrice;
+            }
+                <p>
+                    <h5 align="center">sum:</h5>
+                    <h2 align="right">@Html.FormatValue(allSum, "{0:N2} zł")</h2>
+                    <h5 align="right">+ shipping</h5>
+                </p>
+            
+        }
+        <p>
+            <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">Continue shopping</a>
+        </p>
+        <p>
+            <a class="btn btn-primary form-control">FINISH</a>
+        </p>
+        
+    </section>
+</div>
+</div>
+
+
+

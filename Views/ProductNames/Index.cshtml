@@ -1,0 +1,228 @@
+﻿@model IEnumerable<PO_Projekt.Models.ProductName>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+@*<h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+
+<div class="row">
+    <div class="col-md-11">
+        <section>
+            <input id="SearchContentInput" class="form-control" value="@ViewBag.SearchContent" />
+        </section>
+    </div>
+    <div class="col-md-1 col-md-offset-2">
+        <section>
+            <button id="SearchButton" class="btn btn-primary" onclick="setSelected(event)">Search</button>
+        </section>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-2">
+        <section>
+            <h4>Filters</h4>
+            <p>
+                <select class="form-control" id="ProductTypeList" asp-items="ViewBag.ProductTypeList"
+                        onchange="setSelected(event)">
+                    <option value="-1">All types</option>
+                </select>
+            </p>
+            <p>
+                <select class="form-control" id="ProductFormList" asp-items="ViewBag.ProductFormList"
+                        onchange="setSelected(event)">
+                    <option value="-1">All forms</option>
+                </select>
+            </p>
+            <p>
+                <select class="form-control" id="ManufacturerList" asp-items="ViewBag.ManufacturerList"
+                        onchange="setSelected(event)">
+                    <option value="-1">All manufacturers</option>
+                </select>
+            </p>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    @if (ViewBag.Prescription == "true")
+                    {
+                        <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="PrescriptionButton" name="PrescriptionButton" class="form-check-input" onchange="setSelected(event)" />
+                    }
+                    Prescription
+                </label>
+            </div>
+            <h4>Sorters</h4>
+            <p>
+                <select class="form-control" id="SortersList" asp-items="ViewBag.SortersList"
+                        onchange="setSelected(event)">
+                    <option value="-1">None selected</option>
+                </select>
+            </p>
+            <a class="btn btn-primary form-control" asp-area="" asp-controller="ProductNames" asp-action="Index">
+                Reset
+            </a>
+        </section>
+            </div>
+    @if(Model.Count() != 0) { 
+    
+            <div class="col-md-10 col-md-offset-2">
+                <section>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th width="400">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th width="100">
+                                    @Html.DisplayNameFor(model => model.Price)
+                                </th>
+                                @*<th>
+                                @Html.DisplayNameFor(model => model.RequiresPrescription)
+                            </th>*@
+                                <th width="100"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                            <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShortenedDescription)
+                                    </td>
+                                    <td align="right">
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    @*<td>
+                                    @Html.DisplayFor(modelItem => item.RequiresPrescription)
+                                </td>*@
+                                    <td>
+                                        <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
+                                            <img src="~/image/carts.png" height="40" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+    }
+    else
+            {
+                <div class="col-md-10 col-md-offset-2">
+                    <h3>No items matching filters.</h3>
+                </div>
+            }
+</div>
+
+
+
+<script>
+    window.addEventListener("pageshow", function (event) {
+        var historyTraversal = event.persisted ||
+            (typeof window.performance != "undefined" &&
+                window.performance.navigation.type === 2);
+        if (historyTraversal) {
+            // Handle page restore.
+            window.location.reload();
+        }
+    });
+
+    var input = document.getElementById("SearchContentInput");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("SearchButton").click();
+        }
+    });
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return "";
+    }
+
+    var addToShoppingCart = function (event, id) {
+        var url = window.location.href;
+        var elems = url.split("/");
+        var newUrl = elems[0] + "/" + elems[1] + "/" + elems[2];
+        TempData["CurrentUrl"] = newUrl + "/ProductNames";
+        window.location.href = newUrl + "/ShoppingCart/AddCart?id=" + id;
+    }
+
+    var setSelected = function (event) {
+        var url = window.location.href;
+        var elems = url.split("/");
+        var newUrl = elems[0] + "/" + elems[1] + "/" + elems[2] + "/ProductNames";
+
+        var liProductTypeList = document.getElementById('ProductTypeList');
+        var liProductFormList = document.getElementById('ProductFormList');
+        var liManufacturerList = document.getElementById('ManufacturerList');
+        var liSortersList = document.getElementById('SortersList');
+        var SearchContentInput = document.getElementById('SearchContentInput');
+        var PrescriptionButton = document.querySelector('#PrescriptionButton');
+        var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
+        var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
+        var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
+        var selectedSorterId = liSortersList.options[liSortersList.selectedIndex].value;
+        var searchContent = SearchContentInput.value;
+        var PrescriptionVal = PrescriptionButton.checked;
+
+        var selectedStr = ""
+        if (selectedProductTypeId != -1) {
+            selectedStr += "producttypeid=" + selectedProductTypeId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (selectedProductFormId != -1) {
+            selectedStr += "productformid=" + selectedProductFormId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (selectedManufacturerId != -1) {
+            selectedStr += "manufacturerid=" + selectedManufacturerId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        if (selectedSorterId != -1) {
+            selectedStr += "sorterid=" + selectedSorterId;
+        }
+        if (selectedStr != "") {
+            selectedStr += "&"
+        }
+        selectedStr += "prescriptionvalue=" + PrescriptionVal;
+        selectedStr += "&"
+        if (searchContent != "") {
+            searchContent = searchContent.replace(' ', '+')
+            selectedStr += "searchcontent=" + searchContent;
+        }
+        window.location.href = newUrl + "?" + selectedStr;
+
+    };
+</script>

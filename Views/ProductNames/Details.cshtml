@@ -1,0 +1,138 @@
+﻿@model PO_Projekt.Models.ProductName
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <section>
+            <img src="@Html.DisplayFor(model => model.PhotoRelativePath)" width="500" />
+        </section>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+            <p>
+                @Html.DisplayFor(model => model.Description)
+            </p>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.RequiresPrescription)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.RequiresPrescription)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Manufacturer)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Manufacturer.Name)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ProductForm)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ProductForm.Name)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ProductType)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ProductType.Name)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-8">
+                    <h5>
+                        @Html.DisplayFor(model => model.Price)
+                    </h5>
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ShoppingCartCount)
+                </dt>
+                <dd class="col-sm-8">
+                    <h5>
+                        <a asp-controller="ProductNames" asp-action="SubCartDetails" asp-route-id="@Model.Id">
+                            <img src="~/image/minus.png" height="25" />
+                        </a>
+                        @Model.ShoppingCartCount
+                        <a asp-controller="ProductNames" asp-action="AddCartDetails" asp-route-id="@Model.Id">
+                            <img src="~/image/plus.png" height="25" />
+                        </a>
+                    </h5>
+                </dd>
+            </dl>
+        </section>
+    </div>
+</div>
+
+
+@*<div>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<h3>Simmilar products</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th width="100">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th width="100"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SimilarProducts)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <img src="~/image/carts.png" height="40" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    window.addEventListener("pageshow", function (event) {
+        var historyTraversal = event.persisted ||
+            (typeof window.performance != "undefined" &&
+                window.performance.navigation.type === 2);
+        if (historyTraversal) {
+            // Handle page restore.
+            window.location.reload();
+        }
+    });
+</script>
