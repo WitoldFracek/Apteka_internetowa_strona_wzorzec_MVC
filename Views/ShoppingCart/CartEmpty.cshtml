@@ -17,12 +17,12 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">
+                        <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
                             <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
                         </a>
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">
+                        <a asp-controller="ProductNames" asp-action="Details" asp-route-id="@item.Id">
                             @Html.DisplayFor(modelItem => item.Name)
                         </a>
                     </td>

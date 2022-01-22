@@ -20,7 +20,7 @@ namespace PO_Projekt.Controllers
         }
 
         // GET: ProductNames
-        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue, int? SorterId)
+        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue, string? AveilableValue, int? SorterId)
         {
             var allCartIds = Request.Cookies.Select(item => item.Key).ToList();
             var allCartArticles = _context.ProductNames
@@ -30,6 +30,7 @@ namespace PO_Projekt.Controllers
             foreach (var article in allCartArticles)
             {
                 count += Int32.Parse(Request.Cookies[article.Id.ToString()]);
+                article.ShoppingCartCount = Int32.Parse(Request.Cookies[article.Id.ToString()]);
             }
             if(count > 0)
             {
@@ -47,8 +48,18 @@ namespace PO_Projekt.Controllers
                     new SelectListItem { Selected = false, Text = "Price up", Value = "1" },
                 }, "Value", "Text", SorterId);
 
-            var shopContextFiltered = _context.ProductNames.Select(a => a);
-            if(ProductTypeId != null)
+            IQueryable<ProductName> shopContextFiltered = null;
+            if (AveilableValue == "true" || AveilableValue == null)
+            {
+                shopContextFiltered = _context.Products.Include(p => p.ProductName).Select(item => item.ProductName).Distinct();
+                ViewData["Aveilable"] = "true";
+            }
+            else
+            {
+                shopContextFiltered = _context.ProductNames.Select(a => a);
+                ViewData["Aveilable"] = "false";
+            }
+            if (ProductTypeId != null)
             {
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductTypeId == ProductTypeId);
             }
@@ -84,6 +95,44 @@ namespace PO_Projekt.Controllers
                 shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == false);
                 ViewData["Prescription"] = "false";
             }
+            foreach(var article in shopContextFiltered)
+            {
+                article.AvailableAmount = 0;
+            }
+            foreach (var article in allCartArticles)
+            {
+                article.AvailableAmount = 0;
+            }
+
+            var products = _context.Products;
+            var availableSum = 0;
+            foreach (var product in products)
+            {
+                var firstItem = allCartArticles
+                    .Where<ProductName>(item => item.Id == product.ProductNameId)
+                    .FirstOrDefault<ProductName>();
+                if (firstItem != null)
+                {
+                    firstItem.AvailableAmount += 1;
+                    availableSum += 1;
+                }
+                firstItem = shopContextFiltered
+                    .Where<ProductName>(item => item.Id == product.ProductNameId)
+                    .FirstOrDefault<ProductName>();
+                if (firstItem != null)
+                {
+                    firstItem.AvailableAmount += 1;
+                }
+            }
+            foreach (var pn in allCartArticles)
+            {
+                if (pn.AvailableAmount < pn.ShoppingCartCount)
+                {
+                    ViewData["CartOk"] = false;
+                    ViewData["CartChangeMessage"] = "Some of the products added to shopping cart are unavailable.";
+                }
+            }
+
             return View(await shopContextFiltered.ToListAsync());
         }
 
@@ -158,6 +207,19 @@ namespace PO_Projekt.Controllers
                             .Include(p => p.ProductType)
                             .Where(p => p.ProductType == productName.ProductType);
             productName.SimilarProducts = queryable.ToList<ProductName>();
+
+            int productsNbr = _context.Products
+                .Where<Product>(item => item.ProductNameId == id).ToList().Count;
+            if (productsNbr == 0)
+            {
+                ViewData["CartOk"] = false;
+                ViewData["CartChangeMessage"] = "This product is not available.";
+            }
+            else if(productName.ShoppingCartCount > productsNbr)
+            {
+                ViewData["CartOk"] = false;
+                ViewData["CartChangeMessage"] = $"Max {productsNbr} available.";
+            }
 
             return View("Details", productName);
         }

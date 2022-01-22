@@ -9,7 +9,9 @@
     <p>
         <a asp-action="Create">Create New</a>
     </p>*@
-
+<p class="text-danger">
+    @ViewBag.CartChangeMessage
+</p>
 
 <div class="row">
     <div class="col-md-11">
@@ -61,6 +63,17 @@
                     }
                     Prescription
                 </label>
+                <label class="form-check-label">
+                    @if (ViewBag.Aveilable == "true")
+                    {
+                        <input type="checkbox" id="AveilableButton" name="AveilableButton" class="form-check-input" onchange="setSelected(event)" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="AveilableButton" name="AveilableButton" class="form-check-input" onchange="setSelected(event)" />
+                    }
+                    Only aveilable
+                </label>
             </div>
             <h4>Sorters</h4>
             <p>
@@ -100,9 +113,6 @@
                                 <th width="100">
                                     @Html.DisplayNameFor(model => model.Price)
                                 </th>
-                                @*<th>
-                                @Html.DisplayNameFor(model => model.RequiresPrescription)
-                            </th>*@
                                 <th width="100"></th>
                             </tr>
                         </thead>
@@ -122,13 +132,14 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ShortenedDescription)
+                                        @if (item.AvailableAmount == 0)
+                                        {
+                                            <p class="text-danger">not available</p>
+                                        }
                                     </td>
                                     <td align="right">
                                         @Html.DisplayFor(modelItem => item.Price)
                                     </td>
-                                    @*<td>
-                                    @Html.DisplayFor(modelItem => item.RequiresPrescription)
-                                </td>*@
                                     <td>
                                         <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
                                             <img src="~/image/carts.png" height="40" />
@@ -196,12 +207,14 @@
         var liSortersList = document.getElementById('SortersList');
         var SearchContentInput = document.getElementById('SearchContentInput');
         var PrescriptionButton = document.querySelector('#PrescriptionButton');
+        var AveilableButton = document.querySelector('#AveilableButton');
         var selectedProductTypeId = liProductTypeList.options[liProductTypeList.selectedIndex].value;
         var selectedProductFormId = liProductFormList.options[liProductFormList.selectedIndex].value;
         var selectedManufacturerId = liManufacturerList.options[liManufacturerList.selectedIndex].value;
         var selectedSorterId = liSortersList.options[liSortersList.selectedIndex].value;
         var searchContent = SearchContentInput.value;
         var PrescriptionVal = PrescriptionButton.checked;
+        var AveilableVal = AveilableButton.checked;
 
         var selectedStr = ""
         if (selectedProductTypeId != -1) {
@@ -229,6 +242,8 @@
             selectedStr += "&"
         }
         selectedStr += "prescriptionvalue=" + PrescriptionVal;
+        selectedStr += "&"
+        selectedStr += "aveilablevalue=" + AveilableVal;
         selectedStr += "&"
         if (searchContent != "") {
             searchContent = searchContent.replace(' ', '+')

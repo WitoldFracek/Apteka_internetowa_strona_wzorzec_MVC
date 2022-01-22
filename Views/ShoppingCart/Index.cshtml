@@ -4,8 +4,11 @@
     ViewData["Title"] = "Shopping cart";
 }
 
-<h1>Shopping cart</h1>
+<h1>Shopping cart (@ViewBag.CartCount)</h1>
 <br />
+<p class="text-danger">
+    @ViewBag.CartChangeMessage
+</p>
 <div class="row">
 <div class="col-md-9">
     <section>
@@ -28,6 +31,11 @@
                     <th width="1"></th>
                     <th></th>
                     <th></th>
+                    @if (ViewBag.CartOk == false)
+                    {
+                        <th>@Html.DisplayNameFor(model => model.AvailableAmount)</th>
+                    }
+                        
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +86,24 @@
                         <td>
                             <a asp-action="DelCart" asp-route-id="@item.Id"><img src="~/image/bin.png" height="25" /></a>
                         </td>
+                        @if(ViewBag.CartOk == false)
+                        {
+                            <td>
+                                @if (item.AvailableAmount == 0)
+                                {
+                                    <p class="text-danger">
+                                        not available
+                                    </p>
+                                }
+                                else if (item.ShoppingCartCount > item.AvailableAmount)
+                                {
+                                    <p class="text-danger">
+                                        max @item.AvailableAmount is available
+                                    </p>
+                                }
+                            </td>
+                        }
+                        
                     </tr>
                 }
             </tbody>
@@ -102,9 +128,19 @@
         <p>
             <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">Continue shopping</a>
         </p>
-        <p>
-            <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">BUY</a>
-        </p>
+        @if (ViewBag.CartOk == false)
+        {
+            <p>
+                <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control disabled">BUY</a>
+            </p>
+        }
+        else
+        {
+            <p>
+                <a asp-controller="ProductNames" asp-action="Index" class="btn btn-primary form-control">BUY</a>
+            </p>
+        }
+        
 
     </section>
 </div>

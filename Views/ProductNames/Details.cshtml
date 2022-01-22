@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Details";
 }
-
 <br />
 <div class="row">
     <div class="col-md-6">
@@ -14,6 +13,9 @@
     <div class="col-md-6 col-md-offset-2">
         <section>
             <h2>@Html.DisplayFor(model => model.Name)</h2>
+            <h5 class="text-danger">
+                @ViewBag.CartChangeMessage
+            </h5>
             <p>
                 @Html.DisplayFor(model => model.Description)
             </p>
@@ -58,9 +60,17 @@
                 </dt>
                 <dd class="col-sm-8">
                     <h5>
-                        <a asp-controller="ProductNames" asp-action="SubCartDetails" asp-route-id="@Model.Id">
+                        @if (Model.ShoppingCartCount == 0)
+                        {
                             <img src="~/image/minus.png" height="25" />
-                        </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="ProductNames" asp-action="SubCartDetails" asp-route-id="@Model.Id">
+                                <img src="~/image/minus.png" height="25" />
+                            </a>
+                        }
+
                         @Model.ShoppingCartCount
                         <a asp-controller="ProductNames" asp-action="AddCartDetails" asp-route-id="@Model.Id">
                             <img src="~/image/plus.png" height="25" />
@@ -116,7 +126,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">
+                    <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
                         <img src="~/image/carts.png" height="40" />
                     </a>
                 </td>

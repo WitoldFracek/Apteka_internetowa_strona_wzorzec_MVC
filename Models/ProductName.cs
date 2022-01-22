@@ -69,5 +69,9 @@ namespace PO_Projekt.Models
         [DataType(DataType.Currency)]
         [Display(Name = "Sum")]
         public double ShoppingCartSumPrice { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Available amount")]
+        public int AvailableAmount { get; set; }
     }
 }

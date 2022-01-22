@@ -40,8 +40,31 @@ namespace PO_Projekt.Controllers
                 article.ShoppingCartCount = Int32.Parse(Request.Cookies[article.Id.ToString()]);
                 article.ShoppingCartSumPrice = article.Price * article.ShoppingCartCount;
                 count += article.ShoppingCartCount;
+                article.AvailableAmount = 0;
             }
             ViewData["CartCount"] = count;
+            var products = _context.Products
+                .Where<Product>(item => allCartIds.Contains(item.ProductNameId.ToString()));
+            var availableSum = 0;
+            foreach(var product in products)
+            {
+                var firstItem = allCartArticles
+                    .Where<ProductName>(item => item.Id == product.ProductNameId)
+                    .FirstOrDefault<ProductName>();
+                if(firstItem != null)
+                {
+                    firstItem.AvailableAmount += 1;
+                    availableSum += 1;
+                }
+            }
+            foreach(var pn in allCartArticles)
+            {
+                if(pn.AvailableAmount < pn.ShoppingCartCount)
+                {
+                    ViewData["CartOk"] = false;
+                    ViewData["CartChangeMessage"] = "Some of the products added to shopping cart are unavailable.";
+                }
+            }
 
             return View(await allCartArticles.ToListAsync());
         }
@@ -55,7 +78,6 @@ namespace PO_Projekt.Controllers
                 iCount = int.Parse(sCount);
             }
             iCount += 1;
-
             Response.Cookies.Append(id.ToString(), iCount.ToString());
             return RedirectToAction("");
         }
@@ -77,10 +99,7 @@ namespace PO_Projekt.Controllers
         public async Task<IActionResult> SubCart(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
-            int iCount = 1;
-            iCount = int.Parse(sCount);
-            iCount -= 1;
-
+            int iCount = int.Parse(sCount) - 1;
             if (iCount > 0)
             {
                 Response.Cookies.Append(id.ToString(), iCount.ToString());
@@ -95,10 +114,12 @@ namespace PO_Projekt.Controllers
         public async Task<IActionResult> SubCartRedirect(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
-            int iCount = 1;
-            iCount = int.Parse(sCount);
+            int iCount = 0;
+            if(sCount != null)
+            {
+                iCount = int.Parse(sCount);
+            }
             iCount -= 1;
-
             if (iCount > 0)
             {
                 Response.Cookies.Append(id.ToString(), iCount.ToString());
