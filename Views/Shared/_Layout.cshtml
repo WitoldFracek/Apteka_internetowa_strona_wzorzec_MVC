@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Settings">
                                 <img src="~/image/list.png" height="40" />
                             </a>
                         </li>
@@ -84,4 +84,64 @@
         top: 80%;
         left: 95%;
     }
+
+    .menu {
+        visibility: hidden;
+    }
+
+    button + .menu:active,
+    button:focus + .menu {
+        visibility: visible;
+    }
+
+    @*.mydropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        background: transparent;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content p {
+        color: black;
+    }
+
+    .dropdown-content p:hover {
+        background-color: #ddd
+    }*@
+
 </style>
+
+<script>
+    function dropdownOptions() {
+        document.getElementById("dropdownContent").classList.toggle("show");
+        console.log('ok');
+    };
+
+    @*window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn') || !event.target.matches('.dropdownImage')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+                console.log("hide");
+            }
+        }
+    };*@
+</script>

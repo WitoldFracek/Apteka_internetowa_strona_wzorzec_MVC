@@ -1,0 +1,124 @@
+﻿@model (List<Prescription>, SearchPrescriptionData, Prescription)
+
+@{
+    ViewData["Title"] = "Recepty";
+}
+<div class="row">
+    <div class="col-3">
+        <h4>Dodawanie recepty</h4>
+        <section>
+            <form asp-action="SearchPrescription">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Item2.Id" class="control-label">Kod recepty</label>
+                    <input asp-for="Item2.Id" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Item2.Pesel" class="control-label">Pesel</label>
+                    <input asp-for="Item2.Pesel" class="form-control" />
+                    <span asp-validation-for="Item2.Pesel" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Wyszukaj" class="btn btn-primary" />
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="col-9 bordered">
+        <h3 class="display-4 text-center">Dostępne recepty</h3>
+        <p></p>
+        @if (Model.Item1.Count() == 0)
+        {
+            <p class="text-danger">Brak zapisanych recept</p>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Kod recepty
+                    </th>
+                    <th>
+                        Data wystawienia
+                    </th>
+                    <th>
+                        Data ważności
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pres in Model.Item1)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(i => pres.PrescriptionCode)
+                        </td>
+                        <td>
+                            @pres.StartDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td>
+                            @pres.EndDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td>
+                            <a asp-action="RemovePrescription" asp-route-code="@pres.PrescriptionCode">
+                                <img src="~/image/bin.png" height="30" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row empty"></div>
+<div class="row">
+    @if (Model.Item3.Id != -1)
+    {
+        <div class="col-12 bordered">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Kod recepty</td>
+                        <td>Data wystawienia</td>
+                        <td>Data ważności</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.Item3.PrescriptionCode)
+                        </td>
+                        <td>
+                            @Model.Item3.StartDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td>
+                            @Model.Item3.EndDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td>
+                            <a asp-action="AddPrescription" asp-route-code="@Model.Item3.PrescriptionCode" asp-route-startdate="@Model.Item3.StartDate" asp-route-enddate="@Model.Item3.EndDate">Dodaj</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>
+
+<style>
+    .bordered {
+        border: 3px solid #339933;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .empty {
+        height: 5px;
+    }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
