@@ -14,9 +14,8 @@ namespace PO_Projekt.Models
         public int Id { get; set; }
 
         public User User { get; set; }
-
-        [Required]
         public int UserId { get; set; }
+
 
         [Required]
         [MaxLength(30, ErrorMessage = "City name cannot be longer than {1} characters")]

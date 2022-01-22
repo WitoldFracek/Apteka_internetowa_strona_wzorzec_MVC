@@ -196,7 +196,10 @@ namespace PO_Projekt
                     ShippingDataId = 0,
                     UserId = 1,
                     OrderDate = new DateTime(2022, 1, 1),
-                    ShippingType = ShippingType.Delivery
+                    ShippingType = ShippingType.Delivery,
+                    Name = "Anna",
+                    LastName = "Hahałowksa",
+                    Phone = 274654423
                 },
                 new Order()
                 {
@@ -204,7 +207,10 @@ namespace PO_Projekt
                     ShippingDataId = 1,
                     UserId = 1,
                     OrderDate = new DateTime(2021, 12, 24),
-                    ShippingType = ShippingType.ParcelLocker
+                    ShippingType = ShippingType.ParcelLocker,
+                    Name = "Anna",
+                    LastName = "Hahałowksa",
+                    Phone = 274654423
                 },
                 new Order()
                 {
@@ -212,7 +218,10 @@ namespace PO_Projekt
                     ShippingDataId = 2,
                     UserId = 2,
                     OrderDate = new DateTime(2021, 12, 10),
-                    ShippingType = ShippingType.PostOffice
+                    ShippingType = ShippingType.PostOffice,
+                    Name = "Korneliusz",
+                    LastName = "Śmigły",
+                    Phone = 502578335
                 },
                 new Order()
                 {
@@ -220,7 +229,10 @@ namespace PO_Projekt
                     ShippingDataId = 2,
                     UserId = 2,
                     OrderDate = new DateTime(2022, 1, 11),
-                    ShippingType = ShippingType.Delivery
+                    ShippingType = ShippingType.Delivery,
+                    Name = "Korneliusz",
+                    LastName = "Śmigły",
+                    Phone = 502578335
                 }
                 );
 

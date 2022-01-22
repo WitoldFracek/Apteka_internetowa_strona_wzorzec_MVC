@@ -22,9 +22,21 @@ namespace PO_Projekt.Models
         [NotMapped]
         public ShippingData ShippingData { get; set; }
         
-        [Required]
-        public int UserId { get; set; }
         
+        public int UserId { get; set; }
+
+        [Required]
+        [MinLength(2, ErrorMessage = "Imie jest wymagane")]
+        [MaxLength(30, ErrorMessage = "Imie nie może być dzłuższe niż {1} znaków")]
+        public string Name { get; set; }
+
+        [Required]
+        [MinLength(2, ErrorMessage = "Nazwisko jest wymagane")]
+        [MaxLength(40, ErrorMessage = "Nazwisko nie może być dzłuższe niż {1} znaków")]
+        public string LastName { get; set; }
+
+        public int Phone { get; set; }
+
         [ForeignKey("UserId")]
         [NotMapped]
         public User User { get; set; }

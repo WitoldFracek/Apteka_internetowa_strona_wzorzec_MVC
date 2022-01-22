@@ -17,7 +17,7 @@ namespace PO_Projekt.Models
         [Required]
         public int ProductId { get; set; }
         [NotMapped]
-        public Product Order { get; set; }
+        public Order Order { get; set; }
         [Required]
         public int OrderId { get; set; }
 

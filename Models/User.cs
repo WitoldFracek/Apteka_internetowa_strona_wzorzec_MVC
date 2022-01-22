@@ -25,5 +25,47 @@ namespace PO_Projekt.Models
         public string Password { get; set; }
 
         public DateTime BirthDate { get; set; }
+
+        [NotMapped]
+        public List<Prescription> AllPrescriptions { get; set; }
+        [NotMapped]
+        public List<ShippingData> AllShippingData { get; set; }
+        [NotMapped]
+        public List<ProductName> SelectedProducts { get; set; }
+        [Required]
+        [NotMapped]
+        public string DeliveryOption { get; set; }
+        [Required]
+        [NotMapped]
+        public string PaymentMethod { get; set; }
+        [Required]
+        [NotMapped]
+        [MinLength(2, ErrorMessage = "Pole \"Imię\" jest wymagane.")]
+        public string Name { get; set; }
+        [Required]
+        [NotMapped]
+        [MinLength(2, ErrorMessage = "Pole \"Nazwisko\" jest wymagane.")]
+        public string LastName { get; set; }
+        [Required]
+        [NotMapped]
+        public int Phone { get; set; }
+        [Required]
+        [NotMapped]
+        [MinLength(2, ErrorMessage = "Pole \"Ulica\" jest wymagane.")]
+        public string StreetName { get; set; }
+        [Required]
+        [NotMapped]
+        [MinLength(2, ErrorMessage = "Pole \"Numer domu\" jest wymagane.")]
+        public string HouseNumber { get; set; }
+        [NotMapped]
+        public string LocalNumber { get; set; }
+        [Required]
+        [NotMapped]
+        [Range(10000, 99999, ErrorMessage = "Pole \"Kod pocztowy\" jest wymagane.")]
+        public int PostalCode { get; set; }
+        [Required]
+        [NotMapped]
+        [MinLength(2, ErrorMessage = "Pole \"Miasto\" jest wymagane.")]
+        public string City { get; set; }
     }
 }

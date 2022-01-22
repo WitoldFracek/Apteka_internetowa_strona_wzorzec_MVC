@@ -28,6 +28,9 @@ namespace PO_Projekt.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShippingDataId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Phone = table.Column<int>(type: "int", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ShippingType = table.Column<int>(type: "int", nullable: false)
                 },
@@ -37,20 +40,16 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductNames",
+                name: "ProductForms",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    RequiresPrescription = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ManufacturerId = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductNames", x => x.Id);
+                    table.PrimaryKey("PK_ProductForms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +59,8 @@ namespace PO_Projekt.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,17 +68,16 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ProductTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductNameId = table.Column<int>(type: "int", nullable: false),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_ProductTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,6 +93,44 @@ namespace PO_Projekt.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductNames",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    RequiresPrescription = table.Column<bool>(type: "bit", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ManufacturerId = table.Column<int>(type: "int", nullable: false),
+                    ImageFilename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductFormId = table.Column<int>(type: "int", nullable: false),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductNames", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductNames_Manufacturers_ManufacturerId",
+                        column: x => x.ManufacturerId,
+                        principalTable: "Manufacturers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductNames_ProductForms_ProductFormId",
+                        column: x => x.ProductFormId,
+                        principalTable: "ProductForms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductNames_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -143,6 +180,26 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductNameId = table.Column<int>(type: "int", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_ProductNames_ProductNameId",
+                        column: x => x.ProductNameId,
+                        principalTable: "ProductNames",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PrescriptionOrders",
                 columns: table => new
                 {
@@ -181,50 +238,52 @@ namespace PO_Projekt.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "Id", "OrderDate", "ShippingDataId", "ShippingType", "UserId" },
+                columns: new[] { "Id", "LastName", "Name", "OrderDate", "Phone", "ShippingDataId", "ShippingType", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 3, 1 },
-                    { 2, new DateTime(2021, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1 },
-                    { 3, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 2 },
-                    { 4, new DateTime(2022, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 3, 2 }
+                    { 1, "Hahałowksa", "Anna", new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 274654423, 0, 3, 1 },
+                    { 2, "Hahałowksa", "Anna", new DateTime(2021, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 274654423, 1, 1, 1 },
+                    { 3, "Śmigły", "Korneliusz", new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 502578335, 2, 2, 2 },
+                    { 4, "Śmigły", "Korneliusz", new DateTime(2022, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 502578335, 2, 3, 2 }
                 });
 
             migrationBuilder.InsertData(
-                table: "ProductNames",
-                columns: new[] { "Id", "Description", "ManufacturerId", "Name", "Price", "RequiresPrescription" },
+                table: "ProductForms",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 3, "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.", 4, "Opaska elastyczna z zapinką", 3.9900000000000002, false },
-                    { 2, "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.", 3, "Apap", 6.9900000000000002, false },
-                    { 1, "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni", 1, "Xanax", 45.990000000000002, true }
+                    { 6, "Proszek" },
+                    { 5, "Kapsułka" },
+                    { 4, "Zawiesina" },
+                    { 7, "Opatrunek" },
+                    { 2, "Plaster" },
+                    { 1, "Tabletka" },
+                    { 3, "Saszetka" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ProductOrders",
-                columns: new[] { "Id", "OrderId", "ProductId" },
+                columns: new[] { "Id", "Count", "OrderId", "ProductId" },
                 values: new object[,]
                 {
-                    { 2, 3, 1 },
-                    { 1, 4, 11 }
+                    { 1, 1, 4, 11 },
+                    { 2, 2, 3, 1 }
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "ExpirationDate", "ProductNameId" },
+                table: "ProductTypes",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 11, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 6, new DateTime(2022, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 7, new DateTime(2022, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 5, new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 4, new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 3, new DateTime(2022, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, new DateTime(2022, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 1, new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 }
+                    { 9, "inne" },
+                    { 8, "leki" },
+                    { 7, "dziecko" },
+                    { 6, "przeziębienie" },
+                    { 4, "przeciwbólowe" },
+                    { 3, "suplementy" },
+                    { 2, "kosmetyki" },
+                    { 1, "sprzęt medyczny" },
+                    { 5, "antybiotyki" }
                 });
 
             migrationBuilder.InsertData(
@@ -248,6 +307,18 @@ namespace PO_Projekt.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ProductNames",
+                columns: new[] { "Id", "Description", "ImageFilename", "ManufacturerId", "Name", "Price", "ProductFormId", "ProductTypeId", "RequiresPrescription" },
+                values: new object[,]
+                {
+                    { 3, "To wyrób medyczny, wielokrotnego użytku. Produkt może być stosowany jako opaska podtrzymująca opatrunki, uciskowa oraz usztywniająca okolice okołostawowe. Długość opaski po relaksacji wynosi nie mniej niż 1,5 m.", "opaska-elastyczna-tkana-z-zapinka.jpg", 4, "Opaska elastyczna z zapinką", 3.9900000000000002, 7, 1, false },
+                    { 2, "Lek przeciwbólowy i przeciwgorączkowy, który jako substancję czynną zawiera paracetamol. Lek stosuje się w bólach różnego pochodzenia, zarówno głowy, zębów, mięśni jak i menstruacyjnych, kostno-stawowych czy nerwobólach.", "apap.jpg", 3, "Apap", 6.9900000000000002, 1, 6, false },
+                    { 1, "Neurologia Psychiatria: nasenne przeciwlękowe przeciwdrgawkowe uspokajające zmniejsza napięcie mięśni", "xanax.jpg", 1, "Xanax", 45.990000000000002, 1, 8, true },
+                    { 4, "Ibuprom Max to lek przeciwbólowy, ale także stosuje się go w leczeniu stanu zapalnego. Lek również obniża gorączkę.", "", 1, "Ibuprom Max, 400 mg, tabletki drażowane, 48 szt. (butelka)", 26.489999999999998, 1, 8, false },
+                    { 5, "Produkt leczniczy Ibuprom działa przeciwbólowo, przeciwzapalnie i przeciwgorączkowo. Stosuje się go w bólach głowy, zębów, mięśniowych, okolicy lędźwiowo-krzyżowej, kostnych i stawowych oraz w bolesnym miesiączkowaniu oraz w gorączce.", "", 2, "Ibuprom, 200 mg, tabletki powlekane, 10 szt.", 6.9900000000000002, 1, 8, false }
+                });
+
+            migrationBuilder.InsertData(
                 table: "ShippingData",
                 columns: new[] { "Id", "City", "HomeNumber", "LocalNumber", "PostalNumber", "Street", "UserId" },
                 values: new object[,]
@@ -262,6 +333,24 @@ namespace PO_Projekt.Migrations
                 table: "PrescriptionOrders",
                 columns: new[] { "Id", "OrderId", "PrescriptionId" },
                 values: new object[] { 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "ExpirationDate", "ProductNameId" },
+                values: new object[,]
+                {
+                    { 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 11, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 4, new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 5, new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 6, new DateTime(2022, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 7, new DateTime(2022, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 1, new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, new DateTime(2022, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, new DateTime(2022, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PrescriptionOrders_OrderId",
@@ -279,6 +368,26 @@ namespace PO_Projekt.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductNames_ManufacturerId",
+                table: "ProductNames",
+                column: "ManufacturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductNames_ProductFormId",
+                table: "ProductNames",
+                column: "ProductFormId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductNames_ProductTypeId",
+                table: "ProductNames",
+                column: "ProductTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ProductNameId",
+                table: "Products",
+                column: "ProductNameId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShippingData_UserId",
                 table: "ShippingData",
                 column: "UserId");
@@ -287,13 +396,7 @@ namespace PO_Projekt.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Manufacturers");
-
-            migrationBuilder.DropTable(
                 name: "PrescriptionOrders");
-
-            migrationBuilder.DropTable(
-                name: "ProductNames");
 
             migrationBuilder.DropTable(
                 name: "ProductOrders");
@@ -311,7 +414,19 @@ namespace PO_Projekt.Migrations
                 name: "Prescriptions");
 
             migrationBuilder.DropTable(
+                name: "ProductNames");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Manufacturers");
+
+            migrationBuilder.DropTable(
+                name: "ProductForms");
+
+            migrationBuilder.DropTable(
+                name: "ProductTypes");
         }
     }
 }

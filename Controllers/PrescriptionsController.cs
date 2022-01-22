@@ -44,7 +44,7 @@ namespace PO_Projekt.Controllers
         public async Task<IActionResult> SearchPrescription([Bind("Code,Pesel")] Prescription pres)
         {
             var addedPrescriptions = await GetStoredPrescriptions();
-            if (pres.Code.ToString().StartsWith("9"))
+            if (pres.Code.ToString().StartsWith("9") || pres.Code <= 0)
             {
                 ViewData["NoPrescription"] = "Nie znaleziono żadnych recept 😢";
                 var first = addedPrescriptions.First();

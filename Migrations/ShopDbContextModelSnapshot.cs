@@ -65,8 +65,21 @@ namespace PO_Projekt.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<int>("ShippingDataId")
                         .HasColumnType("int");
@@ -85,7 +98,10 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 1,
+                            LastName = "Hahałowksa",
+                            Name = "Anna",
                             OrderDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Phone = 274654423,
                             ShippingDataId = 0,
                             ShippingType = 3,
                             UserId = 1
@@ -93,7 +109,10 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 2,
+                            LastName = "Hahałowksa",
+                            Name = "Anna",
                             OrderDate = new DateTime(2021, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Phone = 274654423,
                             ShippingDataId = 1,
                             ShippingType = 1,
                             UserId = 1
@@ -101,7 +120,10 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 3,
+                            LastName = "Śmigły",
+                            Name = "Korneliusz",
                             OrderDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Phone = 502578335,
                             ShippingDataId = 2,
                             ShippingType = 2,
                             UserId = 2
@@ -109,7 +131,10 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 4,
+                            LastName = "Śmigły",
+                            Name = "Korneliusz",
                             OrderDate = new DateTime(2022, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Phone = 502578335,
                             ShippingDataId = 2,
                             ShippingType = 3,
                             UserId = 2
@@ -454,6 +479,9 @@ namespace PO_Projekt.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -468,12 +496,14 @@ namespace PO_Projekt.Migrations
                         new
                         {
                             Id = 1,
+                            Count = 1,
                             OrderId = 4,
                             ProductId = 11
                         },
                         new
                         {
                             Id = 2,
+                            Count = 2,
                             OrderId = 3,
                             ProductId = 1
                         });

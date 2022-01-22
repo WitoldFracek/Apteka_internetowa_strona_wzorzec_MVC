@@ -1,46 +1,47 @@
-﻿@model (User, TransactionData, ShippingData)
+﻿@model User
 @{
     ViewData["Title"] = "Payment";
 }
 
 <form asp-action="BeginTransaction">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
         <div class="col-4">
             <section>
                 <h3>Metody dostawy</h3>
                 <ul style="list-style: none">
                     <li>
-                        <input asp-for="Item2.DeliveryOption" type="radio" name="delivery" value="Delivery" id="d1" /> Kurier UPS-Poltraf transport leków
+                        <input asp-for="DeliveryOption" type="radio" value="delivery" id="d1" checked /> Kurier UPS-Poltraf transport leków
                     </li>
                     <li>
-                        <input asp-for="Item2.DeliveryOption" type="radio" name="delivery" value="ParcelLocker" id="d2" /> Dostawa do paczkowmatu
+                        <input asp-for="DeliveryOption" type="radio" value="parcelLocker" id="d2" /> Dostawa do paczkowmatu
                     </li>
                     <li>
-                        <input asp-for="Item2.DeliveryOption" type="radio" name="delivery" value="LocalStore" id="d3" /> Dostawa do sklepu lokalnego
+                        <input asp-for="DeliveryOption" type="radio" value="localStore" id="d3" /> Dostawa do sklepu lokalnego
                     </li>
                     <li>
-                        <input asp-for="Item2.DeliveryOption" type="radio" name="delivery" value="PostOffice" id="d4" /> Dostawa do urzędu pocztowego
+                        <input asp-for="DeliveryOption" type="radio" value="postOffice" id="d4" /> Dostawa do urzędu pocztowego
                     </li>
                     <li>
-                        <input asp-for="Item2.DeliveryOption" type="radio" name="delivery" value="SelfPickup" id="d5" /> Odbiór osobisty w aptece
+                        <input asp-for="DeliveryOption" type="radio" value="slefPickup" id="d5" /> Odbiór osobisty w aptece
                     </li>
                 </ul>
                 <h3>Metody płatności</h3>
                 <ul style="list-style: none">
                     <li>
-                        <input asp-for="Item2.PaymentMethod" type="radio" name="payment" value="blik" /> Zapłata BLIKiem
+                        <input asp-for="PaymentMethod" type="radio" value="blik" checked /> Zapłata BLIKiem
                     </li>
                     <li>
-                        <input asp-for="Item2.PaymentMethod" type="radio" name="payment" value="card" /> Zapłata kartą
+                        <input asp-for="PaymentMethod" type="radio" value="card" /> Zapłata kartą
                     </li>
                     <li>
-                        <input asp-for="Item2.PaymentMethod" type="radio" name="payment" value="transaction" /> Szybki przelew
+                        <input asp-for="PaymentMethod" type="radio" value="transaction" /> Szybki przelew
                     </li>
                     <li>
-                        <input asp-for="Item2.PaymentMethod" type="radio" name="payment" value="bank" /> Przelew na konto bankowe
+                        <input asp-for="PaymentMethod" type="radio" value="bank" /> Przelew na konto bankowe
                     </li>
                     <li>
-                        <input asp-for="Item2.PaymentMethod" type="radio" name="payment" value="whileDelivered" /> Zapłata gotówką przy odbiorze
+                        <input asp-for="PaymentMethod" type="radio" value="whileDelivered" /> Zapłata gotówką przy odbiorze
                     </li>
                 </ul>
             </section>
@@ -51,74 +52,98 @@
                 <table calss="table">
                     <tr>
                         <td>
-                            <label asp-for="Item2.Email" class="control-label">Adres e-mail </label>
+                            <label asp-for="Email" class="control-label">Adres e-mail </label>
                         </td>
                         <td>
-                            <input asp-for="Item2.Email" class="form-contol" value="@Model.Item1.Email" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="Item2.Name" class="control-label">Imię</label>
+                            <input asp-for="Email" class="form-contol" value="@Model.Email" />
                         </td>
                         <td>
-                            <input asp-for="Item2.Name" class="form-contol" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label asp-for="Item2.LastName" class="control-label">Nazwisko</label>
+                            <label asp-for="Name" class="control-label">Imię</label>
                         </td>
                         <td>
-                            <input asp-for="Item2.LastName" class="form-contol" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="Item2.Phone" class="control-label">Telefon</label>
+                            <input asp-for="Name" class="form-contol" value="Anna"/>
                         </td>
                         <td>
-                            <input asp-for="Item2.Phone" class="form-contol" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label asp-for="Item2.StreetName" class="control-label">Ulica</label>
+                            <label asp-for="LastName" class="control-label">Nazwisko</label>
                         </td>
                         <td>
-                            <input asp-for="Item2.StreetName" class="form-contol" value="@Model.Item3.Street" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="Item2.HouseNumber" class="control-label">Numer domu </label>
+                            <input asp-for="LastName" class="form-contol" value="Hahałowska"/>
                         </td>
                         <td>
-                            <input asp-for="Item2.HouseNumber" class="form-contol" value="@Model.Item3.HomeNumber"/>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label asp-for="Item2.FlatNumber" class="control-label">Numer mieszkania </label>
+                            <label asp-for="Phone" class="control-label">Telefon</label>
                         </td>
                         <td>
-                            <input asp-for="Item2.FlatNumber" class="form-contol" value="@Model.Item3.LocalNumber"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label asp-for="Item2.PostalCode" class="control-label">Kod pocztowy </label>
+                            <input asp-for="Phone" class="form-contol" value="502345621" />
                         </td>
                         <td>
-                            <input asp-for="Item2.PostalCode" class="form-contol" value="@Model.Item3.PostalNumber" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label asp-for="Item2.City" class="control-label">Miasto</label>
+                            <label asp-for="StreetName" class="control-label">Ulica</label>
                         </td>
                         <td>
-                            <input asp-for="Item2.City" class="form-contol" value="@Model.Item3.City"/>
+                            <input asp-for="StreetName" class="form-contol" value="@Model.AllShippingData.First().Street" />
+                        </td>
+                        <td>
+                            <span asp-validation-for="StreetName" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="HouseNumber" class="control-label">Numer domu </label>
+                        </td>
+                        <td>
+                            <input asp-for="HouseNumber" class="form-contol" value="@Model.AllShippingData.First().HomeNumber" />
+                        </td>
+                        <td>
+                            <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="LocalNumber" class="control-label">Numer mieszkania </label>
+                        </td>
+                        <td>
+                            <input asp-for="LocalNumber" class="form-contol" value="@Model.AllShippingData.First().LocalNumber" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="PostalCode" class="control-label">Kod pocztowy </label>
+                        </td>
+                        <td>
+                            <input asp-for="PostalCode" class="form-contol" value="@Model.AllShippingData.First().PostalNumber" />
+                        </td>
+                        <td>
+                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="City" class="control-label">Miasto</label>
+                        </td>
+                        <td>
+                            <input asp-for="City" class="form-contol" value="@Model.AllShippingData.First().City" />
+                        </td>
+                        <td>
+                            <span asp-validation-for="City" class="text-danger"></span>
                         </td>
                     </tr>
                 </table>
@@ -126,10 +151,18 @@
         </div>
         <div class="col-4">
             <section>
-                <h3>Podsumowanie</h3>
-                <h4>Suma do zapłaty:</h4>
-                <h4>@(ViewData["Summary"])</h4>
+                <h3 class="col-sm-6"> Podsumowanie</h3>
+                <h4 class="col-sm-6">Suma do zapłaty:</h4>
+                <h4 id="summary" class="col-sm-6">@(ViewData["Summary"]) zł</h4>
+                <div class="form-group">
+                    <input type="submit" value="Zapłać" class="btn-dark form-contol" />
+                </div>
             </section>
         </div>
     </div>
 </form>
+<img src="~/image/opowi.png" style="margin-top: 40px"/>
+
+<script>
+
+</script>
