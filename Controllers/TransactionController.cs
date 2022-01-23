@@ -11,14 +11,30 @@ namespace PO_Projekt.Controllers
 {
     public class TransactionController : Controller
     {
+        /// <summary>
+        /// A database context that allows for the access to the local database.
+        /// </summary>
+        /// <value>ShopDbContext from root/Data</value>
         private readonly ShopDbContext _context;
+        /// <summary>
+        /// Temporary field. In the future this parameter will be removed. It represents the logged in user.
+        /// </summary>
+        /// <value>The representation od logged user's id.</value>
         private readonly int userId = 1;
 
+        /// <summary>
+        /// This is a constructor for TransactionController
+        /// </summary>
+        /// <param name="context">This parameter is a database context that allows the controller to access database objects</param>
         public TransactionController(ShopDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// An async method that passes transaction related data of a logged in user to the Transaction Details View.
+        /// </summary>
+        /// <returns>Returns the Transaction Details View with user shipping data.</returns>
         public async Task<IActionResult> Details()
         {
             var userData = await _context.Users
@@ -54,6 +70,13 @@ namespace PO_Projekt.Controllers
             return View(userData);
         }
 
+        /// <summary>
+        /// An async method that is called at the beggining of each transaction.
+        /// It directs data to other support methods based on the data binded in Transaction Details View.
+        /// The data are saved in the local database if no other treatment is required.
+        /// </summary>
+        /// <param name="userData">This is an object that contains specified by the the user shipping data for the transaction.</param>
+        /// <returns>Returns the Transaction Finish View</returns>
         public async Task<IActionResult> BeginTransaction([Bind("DeliveryOption,PaymentMethod,Name,Email,LastName,Phone,StreetName,HouseNumber,LocalNumber,PostalCode,City")] User userData)
         {
             var existingUser = await _context.Users
@@ -109,6 +132,13 @@ namespace PO_Projekt.Controllers
             return View("Finish");
         }
 
+        /// <summary>
+        /// An async method that extends the BeginTransaction method. It is called when a logged in user makes transaction.
+        /// Under that condition it checkes whether passed by the user data are already in the local database or is there
+        /// a requirement to create a new ShippingData object in order to store the new data in the local database.
+        /// </summary>
+        /// <param name="userData">Data passed by the user.</param>
+        /// <returns>Returns the Transaction Finish View</returns>
         private async Task<IActionResult> TransactionWithExistingUser(User userData)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == userData.Email.ToLower());
@@ -136,6 +166,15 @@ namespace PO_Projekt.Controllers
             return await TransactionWithEistingUserAndNewData(user, userData);
         }
 
+        /// <summary>
+        /// An async method that extends the TransactionWithExistinguser method. It saves the transaction data using
+        /// the existing user shipping data.
+        /// </summary>
+        /// <param name="user">Existing user.</param>
+        /// <param name="shippingData">Shipping data of the existing user.</param>
+        /// <param name="userData">Additional data (such as name or phone number) that are not normally
+        /// stored in the  database</param>
+        /// <returns>Returns the Transaction Finish View</returns>
         private async Task<IActionResult> TransactionWithEistingUserAndOldData(User user, ShippingData shippingData, User userData)
         {
             var order = new Order()
@@ -174,6 +213,13 @@ namespace PO_Projekt.Controllers
             return View("Finish");
         }
 
+        /// <summary>
+        /// An async method that extends the TransactionWithExistinguser method. It creates a new ShippingData
+        /// object to be stored in the local database.
+        /// </summary>
+        /// <param name="user">An existing user</param>
+        /// <param name="userData">New user shipping data</param>
+        /// <returns>Returns the Transaction Finish View</returns>
         private async Task<IActionResult> TransactionWithEistingUserAndNewData(User user, User userData)
         {
             var shippingData = new ShippingData()
@@ -221,6 +267,11 @@ namespace PO_Projekt.Controllers
             return View("Finish");
         }
 
+        /// <summary>
+        /// A private method that returns the ShippingData type by the given key.
+        /// </summary>
+        /// <param name="key">The key of shipping type</param>
+        /// <returns>Enum value that represents the shipping type.</returns>
         private ShippingType GetShippingType(string key)
         {
             ShippingType ret;
@@ -248,6 +299,10 @@ namespace PO_Projekt.Controllers
             return ret;
         }
 
+        /// <summary>
+        /// A private method that removes all the product cookies after transaction was successful.
+        /// </summary>
+        /// <param name="boughtCookies">A list of indices of cookies to be removed.</param>
         private void DeleteUnusedCookies(List<int> boughtCookies)
         {
             foreach(var c in boughtCookies)

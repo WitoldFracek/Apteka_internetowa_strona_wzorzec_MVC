@@ -1,0 +1,2 @@
+docfx init -q --output Documentation
+docfx --serve

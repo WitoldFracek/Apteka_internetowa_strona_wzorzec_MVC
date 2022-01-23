@@ -11,19 +11,31 @@ namespace PO_Projekt.Models
 {
     public class User
     {
+        /// <summary>
+        /// Unique identifier.
+        /// </summary>
         [Required]
         [Key]
         [Range(0, int.MaxValue)]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Email address of the user.
+        /// </summary>
         [Required]
         [MaxLength(50, ErrorMessage = "Email address cannot exceed {1} characters")]
         public string Email { get; set; }
 
+        /// <summary>
+        /// Password of the user.
+        /// </summary>
         [Required]
         [MaxLength(20, ErrorMessage = "Password cannot exceed {1} characters")]
         public string Password { get; set; }
 
+        /// <summary>
+        /// Birth date of the user.
+        /// </summary>
         public DateTime BirthDate { get; set; }
 
         [NotMapped]

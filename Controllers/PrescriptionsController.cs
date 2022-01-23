@@ -14,10 +14,12 @@ namespace PO_Projekt.Controllers
         /// <summary>
         /// A database context that allows for the access to the local database.
         /// </summary>
+        /// <value>ShopDbContext from root/Data</value>
         private readonly ShopDbContext _context;
         /// <summary>
         /// Temporary field. In the future this parameter will be removed. It represents the logged in user.
         /// </summary>
+        /// <value>The representation od logged user's id.</value>
         private readonly int userId = 1;
 
         /// <summary>
