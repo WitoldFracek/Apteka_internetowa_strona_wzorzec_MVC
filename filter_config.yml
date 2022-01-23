@@ -1,0 +1,25 @@
+apiRules:
+- exclude:
+    uidRegex: ^Microsoft\.AspNetCore
+    type: Type
+- exclude:
+    uidRegex: ^Microsoft\.Object
+    type: Type
+- exclude:
+    uidRegex: ^System\.Object
+    type: Type
+- exclude:
+    uidRegex: ^Microsoft\.Object
+    type: Method
+- exclude:
+    uidRegex: ^System\.Object
+    type: Method
+- exclude:
+    uidRegex: ^System\.Object
+    type: Property
+- exclude:
+    uidRegex: ^System\.Object
+    type: Field
+- exclude:
+    uidRegex: ^System\.Object
+    type: Member
