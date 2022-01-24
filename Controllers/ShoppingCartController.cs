@@ -16,12 +16,19 @@ namespace PO_Projekt.Controllers
     {
         private readonly ShopDbContext _context;
 
+        /// <summary>
+        /// Controller do obsługi zawartości koszyka.
+        /// </summary>
+        /// <param name="context"></param>
         public ShoppingCartController(ShopDbContext context)
         {
             _context = context;
         }
 
         // GET: ShoppingCartController
+        /// <summary>
+        /// Wyświetlanie całej zawartości koszyka zczytywanych z cookies.
+        /// </summary>
         [Route("ShoppingCart")]
         public async Task<IActionResult> Index()
         {
@@ -69,6 +76,11 @@ namespace PO_Projekt.Controllers
             return View(await allCartArticles.ToListAsync());
         }
 
+        /// <summary>
+        /// Dodawanie danej nazwy produktu do koszyka, odświerzenie koszyka.
+        /// </summary>
+        /// <param name="id">Id nazwy produktu.</param>
+        /// <returns></returns>
         public async Task<IActionResult> AddCart(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
@@ -82,6 +94,11 @@ namespace PO_Projekt.Controllers
             return RedirectToAction("");
         }
 
+        /// <summary>
+        /// Dodawanie danej nazwy produktu do koszyka, powrót do strony poprzedniej.
+        /// </summary>
+        /// <param name="id">Id nazwy produktu.</param>
+        /// <returns></returns>
         public async Task<IActionResult> AddCartRedirect(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
@@ -96,6 +113,11 @@ namespace PO_Projekt.Controllers
             return View("AddCartRedirect");
         }
 
+        /// <summary>
+        /// Odejmowanie nazwy produktu z koszyka, odświerzanie koszyka.
+        /// </summary>
+        /// <param name="id">Id nazwy produktu.</param>
+        /// <returns></returns>
         public async Task<IActionResult> SubCart(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
@@ -111,6 +133,11 @@ namespace PO_Projekt.Controllers
             return RedirectToAction("");
         }
 
+        /// <summary>
+        /// Odejmowanie danej nazwy produktu z koszyka, powrót do strony poprzedniej.
+        /// </summary>
+        /// <param name="id">Id nazwy produktu.</param>
+        /// <returns></returns>
         public async Task<IActionResult> SubCartRedirect(int? id)
         {
             string sCount = Request.Cookies[id.ToString()];
@@ -131,6 +158,11 @@ namespace PO_Projekt.Controllers
             return View("AddCartRedirect");
         }
 
+        /// <summary>
+        /// Usuwanie danej nazwy produktu z koszyka, odświerzanie koszyka.
+        /// </summary>
+        /// <param name="id">Id nazwy produktu.</param>
+        /// <returns></returns>
         public async Task<IActionResult> DelCart(int? id)
         {
             Response.Cookies.Delete(id.ToString());
