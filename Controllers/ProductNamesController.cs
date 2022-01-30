@@ -37,7 +37,7 @@ namespace PO_Projekt.Controllers
             return shopContextFiltered;
         }
 
-        public IQueryable<ProductName> getFilteredList(IQueryable<ProductName> shopContextFiltered, int? ProductTypeId, 
+        public static IQueryable<ProductName> getFilteredList(IQueryable<ProductName> shopContextFiltered, int? ProductTypeId, 
             int? ProductFormId, int? ManufacturerId, string? SearchContent, 
             string? PrescriptionValue)
         {
@@ -56,7 +56,7 @@ namespace PO_Projekt.Controllers
             if (SearchContent != null && SearchContent != "")
             {
                 SearchContent = SearchContent.Replace('+', ' ');
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.Name.Contains(SearchContent));
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.Name.ToLower().Contains(SearchContent.ToLower()));
             }
             if (PrescriptionValue == "true")
             {
@@ -69,7 +69,7 @@ namespace PO_Projekt.Controllers
             return shopContextFiltered;
         }
 
-        public IQueryable<ProductName> getSortedList(IQueryable<ProductName> shopContextFiltered, int? SorterId)
+        public static IQueryable<ProductName> getSortedList(IQueryable<ProductName> shopContextFiltered, int? SorterId)
         {
             if (SorterId == 0)
             {
