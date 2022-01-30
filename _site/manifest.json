@@ -1,0 +1,486 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/HDD/programowanie_C_sharp/PO_projekt/PO_Projekt",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Controllers.HomeController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Controllers.HomeController.html",
+          "hash": "sVLozPKvkYpxQ2MyuwIKcxUwMCTofq8ffQ39ihoWFhs="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Controllers.PrescriptionsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Controllers.PrescriptionsController.html",
+          "hash": "YoVEVjmu51hMpHUAgQ0T+RktIkSylnfMLnl50QGD9Qc="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Controllers.ProductNamesController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Controllers.ProductNamesController.html",
+          "hash": "6bAe80qCv1pgOGDfUwAK+zGHlSeZrRKDoiH5G87U15E="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Controllers.ShoppingCartController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Controllers.ShoppingCartController.html",
+          "hash": "BxAH+EVfdbTh5iXMjoFxOFCrnw8TaJyxSv7vMnZKI2I="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Controllers.TransactionController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Controllers.TransactionController.html",
+          "hash": "UywkuptiXtmsYH84XPHNvw84OifY3DbWuqeYx7/9SH4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Controllers.html",
+          "hash": "Bm863YFzhFUZZK34XxWSd5PlBVJXg2AE5ubDEO2y1dM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Data.ShopDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Data.ShopDbContext.html",
+          "hash": "msYdkn6zuHmSLnVHADeDaGi6+QlZlkGI1F67zficdVU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Data.html",
+          "hash": "W3gKSNtKD8mH8rM+U+mxfKzWCDi8ZTIsDmtNa4rRYyE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Migrations.init.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Migrations.init.html",
+          "hash": "i6Hgb2GvKmUrMN1chvxQ0l6OSjH3dS1TLKa0W4BW1ww="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Migrations.html",
+          "hash": "btSdOAnVDkFTfRtCrVDgZ2laNVURpR1ZzsqHm3edtFA="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.ModelBuilderExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.ModelBuilderExtension.html",
+          "hash": "i90fLofN/1igRpl4DLQo2J+TOExmCXQmAwFKfRwyQbw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ErrorViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ErrorViewModel.html",
+          "hash": "yMK+y7GV8L4Pf3IQZt10926g6h/rrfa02rsa55djPFk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.Manufacturer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.Manufacturer.html",
+          "hash": "j5gaXF0h239768PSgle1XcxFP5V1Wol+tkmKFcRQt7o="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.Order.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.Order.html",
+          "hash": "g6l5I8iLTuHXmoilRD5BVLzjnLtr905wyFBS6nKtyTM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.Prescription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.Prescription.html",
+          "hash": "lYc4WTaUWbaARuQ13Z9jVkDgq4bzPKeJNY9ELIGi33w="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.PrescriptionOrder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.PrescriptionOrder.html",
+          "hash": "IE00I9CWsaowLEFZxxX9CFDQC8XxUCLtbpUp2UQ6lZE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.Product.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.Product.html",
+          "hash": "LBfMNJLw9g/waLvcMWP5w0dpGuAtM0GRb6xOzcvvjkc="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ProductForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ProductForm.html",
+          "hash": "/LBk+4raqRgpYOFnFfzU9D02unhR1jLLU7Ls2AleRYg="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ProductName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ProductName.html",
+          "hash": "nQeIJ6HRHlhxiKmKplmHlvvlTPdhRNuhDLiaWiyqZdM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ProductOrder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ProductOrder.html",
+          "hash": "J+3F+R0h6sp0MG7fRkXtwey9ZqwT3yvoBgT50NJLKEU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ProductType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ProductType.html",
+          "hash": "CMnjIbLtEOMaAh8DuuTYrQ4CkERyOoikJWhFIqKiiak="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.SearchPrescriptionData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.SearchPrescriptionData.html",
+          "hash": "lX7QIzxeq9y2JMK4dkQjFPnzswQ561eeBcA5GhWJVko="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ShippingData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ShippingData.html",
+          "hash": "S+FNk8mw/RjyYbvwwuPbq/pjDAcopstUIquvtJB8kgM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.ShippingType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.ShippingType.html",
+          "hash": "/aAJVlcpCi+G05V37uZrY65dRY9dST/MvzUmQScY8XY="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.TransactionData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.TransactionData.html",
+          "hash": "lAkTOe/66P02GIrCPFYJC1ey6FvS9DShCpde+/XTFAM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.User.html",
+          "hash": "ZiT2qVv4t2xc+9XY0+COUPesWWtboBKUQ8S/pCX8LQk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Models.html",
+          "hash": "vqiJfIposTwaki1M1ms/VaJdxDvJC3iIzfcMmC8lrbg="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Program.html",
+          "hash": "6+OR3nhtpiZlpo0c2qejzcTqE9+iDyr6jMKZizE3OfU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.Startup.html",
+          "hash": "r55VbtnVSpgWLWmSE14V6HL9j2Um+IQ/MS6Jcu7gKbE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PO_Projekt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PO_Projekt.html",
+          "hash": "I7lGP2X6FDxIYwhDf/ffMJ6qNHydSC6jWyIW4pNkNC0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "uT4JevIa6KqVWzHiqgKoDBv2imDNQzFXJWp/2fsXyqk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "jCWvKxo7gJWlga8tVwRcrXJWbj6UxQtLOpUHuTBiTEM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "fbIbT8j9dhv3SQWu9NEqmkWB3fw+TVkKKIpmj2LxuqA="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "BlPxk5mtl2kgfcZUgkEguqiSAR/EUyUTT4EdebwkQvs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "vNkhASHKdzqmr/kSsAC/rLVtNdVxHoOcgq+t0ogRRKw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "WSuRrYiGwKKMbtdG9z8W9fXmLoCyTnGg9AxbPKLXm2Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 30,
+          "skipped_file_count": 30
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

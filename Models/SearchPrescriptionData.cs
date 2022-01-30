@@ -14,5 +14,11 @@ namespace PO_Projekt.Models
         [Required]
         [RegularExpression(@"\d{11}", ErrorMessage = "Niepoprawna wartość numeru pesel.")]
         public string Pesel { get; set; }
+
+        public void Deconstruct(out int id, out string pesel)
+        {
+            id = Id;
+            pesel = Pesel;
+        }
     }
 }

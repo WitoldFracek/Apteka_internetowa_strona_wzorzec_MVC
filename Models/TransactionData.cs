@@ -38,5 +38,17 @@ namespace PO_Projekt.Models
 
         [Required]
         public string City { get; set; }
+
+        public (string, string, int) GetPersonalData()
+        {
+            return (Name, LastName, Phone);
+        }
+
+        public string GetConcatenatedPersonalData(string separator = " ")
+        {
+            if (LastName == null)
+                throw new ArgumentNullException();
+            return $"{Name}{separator}{LastName}{separator}{Phone}";
+        }
     }
 }

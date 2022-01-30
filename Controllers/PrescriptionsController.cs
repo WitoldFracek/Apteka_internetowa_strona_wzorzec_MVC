@@ -74,6 +74,15 @@ namespace PO_Projekt.Controllers
 
                 return View("Index", first);
             }
+
+            if(addedPrescriptions.Select(p => p.PrescriptionCode).Contains(pres.Code))
+            {
+                ViewData["NoPrescription"] = "Ta recepta już znajduje się w systemie";
+                var first = addedPrescriptions.First();
+                first.PrescriptionList = addedPrescriptions;
+                first.Code = -1;
+                return View("Index", first);
+            }
             
             var generatedPrescription = new Prescription
             {
@@ -119,7 +128,6 @@ namespace PO_Projekt.Controllers
         /// <returns>Redirects to Prescription Index View</returns>
         public async Task<IActionResult> RemovePrescription(int? id)
         {
-            Console.WriteLine(id);
             if(id == null)
             {
                 return NotFound();

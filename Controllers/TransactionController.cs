@@ -272,7 +272,7 @@ namespace PO_Projekt.Controllers
         /// </summary>
         /// <param name="key">The key of shipping type</param>
         /// <returns>Enum value that represents the shipping type.</returns>
-        private ShippingType GetShippingType(string key)
+        public ShippingType GetShippingType(string key)
         {
             ShippingType ret;
             switch (key)
@@ -289,7 +289,7 @@ namespace PO_Projekt.Controllers
                 case "postOffice":
                     ret = ShippingType.PostOffice;
                     break;
-                case "slefPickup":
+                case "selfPickup":
                     ret = ShippingType.SelfPickup;
                     break;
                 default:

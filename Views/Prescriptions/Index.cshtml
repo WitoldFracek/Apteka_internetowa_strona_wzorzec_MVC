@@ -11,15 +11,15 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Code" class="control-label">Kod recepty</label>
-                    <input asp-for="Code" class="form-control" value="0" />
+                    <input asp-for="Code" class="form-control" value="0" id="prescription-code-input" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Pesel" class="control-label">Pesel</label>
-                    <input asp-for="Pesel" class="form-control" />
+                    <input asp-for="Pesel" class="form-control" id="pesel-input"/>
                     <span asp-validation-for="Pesel" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Wyszukaj" class="btn btn-primary" />
+                    <input type="submit" value="Wyszukaj" class="btn btn-primary" id="search-prescription"/>
                 </div>
             </form>
         </section>
@@ -29,9 +29,9 @@
         <p></p>
         @if (Model.PrescriptionList.Count() == 0)
         {
-            <p class="text-danger">Brak zapisanych recept</p>
+            <p class="text-danger" id="prescription-error">Brak zapisanych recept</p>
         }
-        <table class="table">
+        <table class="table" id="prescription-table">
             <thead>
                 <tr>
                     <th>
@@ -76,7 +76,7 @@
 <div class="row">
     @if (Model.Code != -1)
     {
-        <div class="col-12 bordered">
+        <div class="col-12 bordered" id="prescription-found-table">
             <table class="table">
                 <thead>
                     <tr>
