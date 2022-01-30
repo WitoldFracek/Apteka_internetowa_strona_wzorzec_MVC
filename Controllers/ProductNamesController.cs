@@ -23,6 +23,65 @@ namespace PO_Projekt.Controllers
             _context = context;
         }
 
+        public IQueryable<ProductName> getAvaliableList(string? AveilableValue)
+        {
+            IQueryable<ProductName> shopContextFiltered = null;
+            if (AveilableValue == "true" || AveilableValue == null)
+            {
+                shopContextFiltered = _context.Products.Include(p => p.ProductName).Select(item => item.ProductName).Distinct();
+            }
+            else
+            {
+                shopContextFiltered = _context.ProductNames.Select(a => a);
+            }
+            return shopContextFiltered;
+        }
+
+        public IQueryable<ProductName> getFilteredList(IQueryable<ProductName> shopContextFiltered, int? ProductTypeId, 
+            int? ProductFormId, int? ManufacturerId, string? SearchContent, 
+            string? PrescriptionValue)
+        {
+            if (ProductTypeId != null)
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductTypeId == ProductTypeId);
+            }
+            if (ProductFormId != null)
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductFormId == ProductFormId);
+            }
+            if (ManufacturerId != null)
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ManufacturerId == ManufacturerId);
+            }
+            if (SearchContent != null && SearchContent != "")
+            {
+                SearchContent = SearchContent.Replace('+', ' ');
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.Name.Contains(SearchContent));
+            }
+            if (PrescriptionValue == "true")
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == true);
+            }
+            else
+            {
+                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == false);
+            }
+            return shopContextFiltered;
+        }
+
+        public IQueryable<ProductName> getSortedList(IQueryable<ProductName> shopContextFiltered, int? SorterId)
+        {
+            if (SorterId == 0)
+            {
+                shopContextFiltered = shopContextFiltered.OrderByDescending(item => item.Price);
+            }
+            if (SorterId == 1)
+            {
+                shopContextFiltered = shopContextFiltered.OrderBy(item => item.Price);
+            }
+            return shopContextFiltered;
+        }
+
         // GET: ProductNames
         /// <summary>
         /// Wyświetla nazwy produktów dla danych filtrów.
@@ -35,7 +94,8 @@ namespace PO_Projekt.Controllers
         /// <param name="AveilableValue">Czy jest obecnie dostępny w sklepie.</param>
         /// <param name="SorterId">Id na metodę sortowania</param>
         /// <returns></returns>
-        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, string? PrescriptionValue, string? AveilableValue, int? SorterId)
+        public async Task<IActionResult> Index(int? ProductTypeId, int? ProductFormId, int? ManufacturerId, string? SearchContent, 
+            string? PrescriptionValue, string? AveilableValue, int? SorterId)
         {
             var allCartIds = Request.Cookies.Select(item => item.Key).ToList();
             var allCartArticles = _context.ProductNames
@@ -63,54 +123,34 @@ namespace PO_Projekt.Controllers
                     new SelectListItem { Selected = false, Text = "Price up", Value = "1" },
                 }, "Value", "Text", SorterId);
 
-            IQueryable<ProductName> shopContextFiltered = null;
+            IQueryable<ProductName> shopContextFiltered = getAvaliableList(AveilableValue);
+            shopContextFiltered = getFilteredList(shopContextFiltered, ProductTypeId, ProductFormId, ManufacturerId, SearchContent, PrescriptionValue);
+            shopContextFiltered = getSortedList(shopContextFiltered, SorterId);
+
             if (AveilableValue == "true" || AveilableValue == null)
             {
-                shopContextFiltered = _context.Products.Include(p => p.ProductName).Select(item => item.ProductName).Distinct();
                 ViewData["Aveilable"] = "true";
             }
             else
             {
-                shopContextFiltered = _context.ProductNames.Select(a => a);
                 ViewData["Aveilable"] = "false";
             }
-            if (ProductTypeId != null)
-            {
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductTypeId == ProductTypeId);
-            }
-            if (ProductFormId != null)
-            {
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ProductFormId == ProductFormId);
-            }
-            if (ManufacturerId != null)
-            {
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.ManufacturerId == ManufacturerId);
-            }
-            if (SorterId == 0)
-            {
-                shopContextFiltered = shopContextFiltered.OrderByDescending(item => item.Price);
-            }
-            if (SorterId == 1)
-            {
-                shopContextFiltered = shopContextFiltered.OrderBy(item => item.Price);
-            }
+
             if (SearchContent != null && SearchContent != "")
             {
                 SearchContent = SearchContent.Replace('+', ' ');
                 ViewData["SearchContent"] = SearchContent;
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.Name.Contains(SearchContent));
             }
             if (PrescriptionValue == "true")
             {
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == true);
                 ViewData["Prescription"] = "true";
             }
             else
             {
-                shopContextFiltered = shopContextFiltered.Where<ProductName>(item => item.RequiresPrescription == false);
                 ViewData["Prescription"] = "false";
             }
-            foreach(var article in shopContextFiltered)
+
+            foreach (var article in shopContextFiltered)
             {
                 article.AvailableAmount = 0;
             }

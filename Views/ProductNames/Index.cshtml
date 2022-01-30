@@ -83,7 +83,7 @@
                 </select>
             </p>
             <p>
-                <a class="btn btn-primary form-control" asp-area="" asp-controller="ProductNames" asp-action="Index">
+                <a id="reset-button" class="btn btn-primary form-control" asp-area="" asp-controller="ProductNames" asp-action="Index">
                     Reset
                 </a>
             </p>
@@ -116,12 +116,12 @@
                                 <th width="100"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="product-name-list">
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                        <a class="product-name-picture" asp-action="Details" asp-route-id="@item.Id">
                                             <img src="@Html.DisplayFor(modelItem => item.PhotoRelativePath)" height="80" />
                                         </a>
                                     </td>
@@ -141,7 +141,7 @@
                                         @Html.DisplayFor(modelItem => item.Price)
                                     </td>
                                     <td>
-                                        <a asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
+                                        <a class="shopping-cart-button" asp-controller="ShoppingCart" asp-action="AddCartRedirect" asp-route-id="@item.Id">
                                             <img src="~/image/carts.png" height="40" />
                                         </a>
                                     </td>

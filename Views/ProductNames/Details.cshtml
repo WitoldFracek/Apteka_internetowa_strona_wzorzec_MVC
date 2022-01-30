@@ -66,13 +66,13 @@
                         }
                         else
                         {
-                            <a asp-controller="ProductNames" asp-action="SubCartDetails" asp-route-id="@Model.Id">
+                            <a id="minus-button" asp-controller="ProductNames" asp-action="SubCartDetails" asp-route-id="@Model.Id">
                                 <img src="~/image/minus.png" height="25" />
                             </a>
                         }
 
                         @Model.ShoppingCartCount
-                        <a asp-controller="ProductNames" asp-action="AddCartDetails" asp-route-id="@Model.Id">
+                        <a id="plus-button" asp-controller="ProductNames" asp-action="AddCartDetails" asp-route-id="@Model.Id">
                             <img src="~/image/plus.png" height="25" />
                         </a>
                     </h5>
